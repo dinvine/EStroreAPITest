@@ -12,11 +12,14 @@ namespace EStoreShoppingSys.Steps
     [Binding]
     public class UserAccountRegisterSteps
     {
-        UserAccount userAccount = new UserAccount();
+        static UserAccount userAccount = null;
         RestClient restClient = null;
         RestRequest restRequest = null;
         IRestResponse restResponse = null;
-
+        UserAccountRegisterSteps()
+        {
+            userAccount = new UserAccount();
+        }
         [Given(@"generate the ""(.*)"" username and ""(.*)"" password")]
         public void GivenGenerateTheUsernameAndPassword(string p0, string p1)
         {
@@ -62,14 +65,14 @@ namespace EStoreShoppingSys.Steps
         }
 
 
-        [Then(@"should get  response  status of """"(.*)""""")]
-        public void ThenShouldGetResponseStatusOf(int p0)
+        [Then(@"should get  response  status of (.*)")]
+        public void ThenShouldGetResponseStatusOf(string p0)
         {
             Dictionary<string, string> headerList = FunctionsShared.getResponseHeaderDict(restResponse);
+            Console.WriteLine(p0);
+            Assert.AreEqual("application/json; charset", headerList["Content-Type"], "Test fail due to the Conten-Type in header is not application json");
 
-            Assert.AreEqual("application/json", headerList["Content-Type"], "Test fail due to the Conten-Type in header is not application json");
-
-            Assert.AreEqual("200 OK", restResponse.StatusCode, "Test fail due to Response StatusCode is not equal to 200 OK");
+            Assert.AreEqual(p0, restResponse.StatusCode.ToString(), "Test fail due to Response StatusCode is not equal to OK");
 
 
         }
@@ -80,7 +83,7 @@ namespace EStoreShoppingSys.Steps
             var jObject = JObject.Parse(restResponse.Content);
             string realValueStr = (string)jObject[p0];
             string expectedValueStr = p1;
-            Assert.AreEqual(p1, realValueStr, "Test fail due to returen value of"+ p0 + " in response body is not equal to "+p1);
+            Assert.AreEqual(expectedValueStr, realValueStr, "Test fail due to return value of"+ p0 + " in response body is not equal to "+ expectedValueStr);
 
         }
 
@@ -93,15 +96,17 @@ namespace EStoreShoppingSys.Steps
 
 
         }
+        
 
-        [Then(@"with item named ""(.*)""  contains value of ""(.*)""")]
-        public void ThenWithItemNamedContainsValueOf(string p0, string p1)
+
+        [Then(@"with item named ""(.*)""  contains ""(.*)""")]
+        public void ThenWithItemNamedContains(string p0, string p1)
         {
             var jObject = JObject.Parse(restResponse.Content);
             string realValueStr = (string)jObject[p0];
-            Assert.IsTrue(realValueStr.ToLower().Contains(p1), "Test fail due to item named '"+p0+"' returned does not contain value of '"+p1+"'");
-
+            Assert.IsTrue(realValueStr.ToLower().Contains(p1), "Test fail due to item named '" + p0 + "' returned does not contain value of '" + p1 + "'");
         }
+
 
 
     }
