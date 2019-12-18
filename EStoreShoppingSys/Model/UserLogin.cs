@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace EStoreShoppingSys.Model
 {
-    class UserLogin
+    class UserLogin:UserAccount
     {
-        public string token { get; set; }
-        public string loginTime { get; set; }
-        public string expiration { get; set; }
+        public string BrowserId{ get; set; }
+        public string AccessToken { get; set; }
+        public string LoginTime { get; set; }
+        public string Expiration { get; set; }
+
+        public string TokenType { get; set; }
     }
 }

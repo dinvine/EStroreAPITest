@@ -9,7 +9,7 @@ namespace EStoreShoppingSys.Model
 {
     public static class FunctionsShared
     {
-        public static string getRandomString(int length)
+        public static string GetRandomString(int length)
         {
             Random r = new Random();
             string rStr = "";            
@@ -21,10 +21,10 @@ namespace EStoreShoppingSys.Model
             return rStr;
         }
 
-        public static Dictionary<string, string> getResponseHeaderDict(IRestResponse restResponse) {
+        public static Dictionary<string, string> GetResponseHeaderDict(IRestResponse restResponse) {
 
             Dictionary<string, string> headerList = new Dictionary<string, string>();
-            string[] keyPairs = null;
+            string[] keyPairs;
             foreach (var item in restResponse.Headers)
             {
                 keyPairs = item.ToString().Split('=');

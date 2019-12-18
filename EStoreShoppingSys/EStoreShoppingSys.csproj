@@ -135,9 +135,11 @@
     <Compile Include="src\EmployeeDetails.cs" />
     <Compile Include="src\EmployeeInfo.cs" />
     <Compile Include="Steps\UserAccountRegisterSteps.cs" />
+    <Compile Include="Steps\UserLoginSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Features\UserLogin.feature" />
     <None Include="Features\UserAccountRegister.feature" />
     <None Include="packages.config" />
   </ItemGroup>

@@ -107,7 +107,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("generate the \"random\" username and \"random\" password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 9
- testRunner.When("visit the register API with the username and password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("visit the register API \"/authentication/register\" with the username and password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 10
  testRunner.Then("should get  response  status of OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -155,7 +155,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("generate the \"existing\" username and \"random\" password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 17
- testRunner.When("visit the register API with the username and password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("visit the register API \"/authentication/register\" with the username and password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 18
  testRunner.Then("should get  response  status of OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -203,7 +203,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("generate the \"empty\" username and \"random\" password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 25
- testRunner.When("visit the register API with the username and password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("visit the register API \"/authentication/register\" with the username and password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 26
  testRunner.Then("should get  response  status of OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -251,7 +251,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("generate the \"random\" username and \"empty\" password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 33
- testRunner.When("visit the register API with the username and password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("visit the register API \"/authentication/register\" with the username and password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 34
  testRunner.Then("should get  response  status of OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
