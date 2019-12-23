@@ -79,7 +79,9 @@ namespace EStoreShoppingSys.Steps
             _settings.MyRestRequest.AddParameter("password", context["password"], ParameterType.GetOrPost);
             _settings.MyRestResponse = _settings.MyRestClient.Execute(_settings.MyRestRequest);
             //set context["accountNumber"]:
-            ThenGetResponseBodyWithIncluding("datas", "accountNumber");
+            var jObject = JObject.Parse(_settings.MyRestResponse.Content);
+            if (jObject["code"].ToString() == "200")
+                ThenGetResponseBodyWithIncluding("datas", "accountNumber");
         }
 
         [Then(@"should get  response  status of (.*)")]
@@ -111,18 +113,17 @@ namespace EStoreShoppingSys.Steps
         public void ThenGetResponseBodyWithIncluding(string datas, string items)
         {
             var jObject = JObject.Parse(_settings.MyRestResponse.Content);
-            if (jObject.ContainsKey(datas))
+            Assert.IsTrue(jObject.ContainsKey(datas), "Test fail due to [" + datas + "] not existing in the response");            
+            foreach (var item in items.Split(','))
             {
-                foreach (var item in items.Split(','))
-                {
-                    string realValueStr = jObject[datas][item].ToString();
-                    Assert.GreaterOrEqual(realValueStr.Length, 1, "Test fail due to " + datas + "." + item + " returned is shorter than 1");
-                    if (!context.ContainsKey(item))
-                        context[item] = realValueStr;
-                    else
-                        context[item + "~Existing"] = realValueStr;
-                }
+                string realValueStr = jObject[datas][item].ToString();
+                Assert.GreaterOrEqual(realValueStr.Length, 1, "Test fail due to " + datas + "." + item + " returned is shorter than 1");
+                if (!context.ContainsKey(item))
+                    context[item] = realValueStr;
+                else
+                    context[item + "~Existing"] = realValueStr;
             }
+            
         }
 
         [Then(@"ThenSetValuesInResponseBodyToContext")]
@@ -171,12 +172,6 @@ namespace EStoreShoppingSys.Steps
 
         }
 
-        [When(@"visit the token API '(.*)' with the  username and password and browserid")]
-        public void WhenVisitTheTokenAPIWithTheUsernameAndPasswordAndBrowserid(string p0)
-        {
-
-        }
-
 
 
         [Given(@"get token at endpoint '(.*)' with '(.*)' credential")]
@@ -215,7 +210,7 @@ namespace EStoreShoppingSys.Steps
             {
                 _settings.MyRestClient = new RestClient(ConfigurationManager.AppSettings["EStoreBaseURL"]);
                 _settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings[endpoint], Method.POST);
-                _settings.MyRestRequest.AddParameter("username", "Invalid_u.d#H", ParameterType.GetOrPost);
+                _settings.MyRestRequest.AddParameter("username", context["username"], ParameterType.GetOrPost);
                 _settings.MyRestRequest.AddParameter("password", context["password"], ParameterType.GetOrPost);
                 _settings.MyRestRequest.AddParameter("browserid", context["browserId"], ParameterType.GetOrPost);
                 _settings.MyRestResponse = _settings.MyRestClient.Execute(_settings.MyRestRequest);
@@ -252,9 +247,11 @@ namespace EStoreShoppingSys.Steps
                 _settings.MyRestRequest.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                 _settings.MyRestRequest.AddParameter("accountNumber", context["accountNumber"]);
 
-            //execute request
-            _settings.MyRestResponse = _settings.MyRestClient.Execute(_settings.MyRestRequest);
-                ThenGetResponseBodyWithIncluding("datas", "cartId,amountDue,accountNumber");
+                //execute request
+                _settings.MyRestResponse = _settings.MyRestClient.Execute(_settings.MyRestRequest);
+                var jObject = JObject.Parse(_settings.MyRestResponse.Content);
+                if(jObject["code"].ToString()=="200")
+                    ThenGetResponseBodyWithIncluding("datas", "cartId,amountDue,accountNumber");
                 Assert.AreEqual(context["accountNumber"], context["accountNumber~Existing"], "Test fail due to accountNumber in response body is not equal to the one get in registration");    
         }
 
@@ -293,8 +290,9 @@ namespace EStoreShoppingSys.Steps
 
             //execute request
             _settings.MyRestResponse = _settings.MyRestClient.Execute(_settings.MyRestRequest);
-
-            ThenGetResponseBodyWithIncluding("datas", "cartId,accountNumber");
+            var jObject = JObject.Parse(_settings.MyRestResponse.Content);
+            if (jObject["code"].ToString() == "200")
+                ThenGetResponseBodyWithIncluding("datas", "cartId,accountNumber");
  
         }
 

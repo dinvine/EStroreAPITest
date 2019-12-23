@@ -107,8 +107,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("get the existing username and password on \'RegisterEndPoint\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 9
- testRunner.When("visit the token API \'TokenEndPoint\' with the  username and password and browserid" +
-                        "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("visit the token API \'TokenEndPoint\' with the  \'valid\' credential", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 10
  testRunner.Then("TokenAPI  should give  response of \'OK\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -151,8 +150,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("get the unregisted username and password on \'RegisterEndPoint\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 15
- testRunner.When("visit the token API \'TokenEndPoint\' with the  username and password and browserid" +
-                        "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("visit the token API \'TokenEndPoint\' with the  \'invalid\' credential", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 16
  testRunner.Then("TokenAPI  should give  response of \'CredentialError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

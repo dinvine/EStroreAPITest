@@ -40,23 +40,16 @@ namespace EStoreShoppingSys.Steps
         [Given(@"get the unregisted username and password on '(.*)'")]
         public void GivenGetTheUnregistedUsernameAndPasswordOn(string endpoint)
         {
-            _sharedSteps.GivenGenerateTheUsernameAndPasswordAt(endpoint, "random", "random");
+            _sharedSteps.GivenGenerateTheUsernameAndPasswordAt(endpoint, "Unexisting_9[@]#~", "random");
         }
 
 
-
-        [When(@"visit the token API '(.*)' with the  username and password and browserid")]
-        public void WhenVisitTheTokenAPIWithTheUsernameAndPasswordAndBrowserid(string p0)
+        [When(@"visit the token API '(.*)' with the  '(.*)' credential")]
+        public void WhenVisitTheTokenAPIWithTheCredential(string endpoint, string credentialIsValid)
         {
-            _settings.MyRestClient = new RestClient(ConfigurationManager.AppSettings["EStoreBaseURL"]);
-            _settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings[p0], Method.POST);
-            _settings.MyRestRequest.AddParameter("username", _scenarioContext["username"], ParameterType.GetOrPost);
-            _settings.MyRestRequest.AddParameter("password", _scenarioContext["password"], ParameterType.GetOrPost);
-            _settings.MyRestRequest.AddParameter("browserid", _scenarioContext["browserId"], ParameterType.GetOrPost);
-            _settings.MyRestResponse = _settings.MyRestClient.Execute(_settings.MyRestRequest);
+            _sharedSteps.GivenGetTokenAtEndpoint(endpoint, credentialIsValid);
         }
-       
-
+        
     [Then(@"TokenAPI  should give  response of '(.*)'")]
     public void ThenTokenAPIShouldGiveResponseOf(string p0)
     {

@@ -6,11 +6,11 @@
 @mytag
 Scenario: success to obtain token by valid credential
 	Given get the existing username and password on 'RegisterEndPoint'
-	When visit the token API 'TokenEndPoint' with the  username and password and browserid
+	When visit the token API 'TokenEndPoint' with the  'valid' credential
 	Then TokenAPI  should give  response of 'OK'
 	And TokenAPI should give json with 'datas' containing items 'accessToken,tokenType,expiresIn,accountNumber'
 
 Scenario: fail to obtain token by invalid credential
 	Given get the unregisted username and password on 'RegisterEndPoint'
-	When visit the token API 'TokenEndPoint' with the  username and password and browserid
+	When visit the token API 'TokenEndPoint' with the  'invalid' credential
 	Then TokenAPI  should give  response of 'CredentialError'
