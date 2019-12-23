@@ -12,114 +12,71 @@ namespace EStoreShoppingSys.Steps
     [Binding]
     public class UserAccountRegisterSteps
     {
-        UserAccount UserAccount { get; set; }
-        RestClient RestClient { get; set; }
-        RestRequest RestRequest { get; set; }
-        IRestResponse RestResponse { get; set; }
-        string EndPointStr { get; set; }
-        UserAccountRegisterSteps()
+        readonly ScenarioContext _scenarioContext;
+        readonly Settings _settings;
+        readonly SharedSteps _sharedSteps;
+
+        UserAccountRegisterSteps(ScenarioContext scenarioContext,Settings p_settings)
         {
-            UserAccount = null;
-            RestClient = null;
-             RestRequest = null;
-             RestResponse = null;
-             EndPointStr = "";
+
+            _scenarioContext = scenarioContext;
+
+            _settings = p_settings;
+
+            _sharedSteps = new SharedSteps(scenarioContext, p_settings);
+
         }
-        [Given(@"generate the ""(.*)"" username and ""(.*)"" password")]
-        public void GivenGenerateTheUsernameAndPassword(string p0, string p1)
+        [When(@"register on '(.*)' with '(.*)' username and '(.*)' password")]
+        public void GivenRegisterOnWithUsernameAndPassword(string endPoint, string username, string password)
         {
-            switch (p0)
+            _sharedSteps.GivenGenerateTheUsernameAndPasswordAt(endPoint, username, password);
+            _sharedSteps.WhenVisitTheRegisterAPIWithTheUsernameAndPassword(endPoint);
+        }
+
+        [Then(@"register should get  response of '(.*)'")]
+        public void ThenRegisterShouldGetResponseOf(string p0)
+        {
+            if(p0=="OK")
             {
-                case "random":
-                    UserAccount.Username = FunctionsShared.GetRandomString(8);
-                    break;
-                case "empty":
-                    UserAccount.Username = "";
-                    break;
-                case "existing":
-                    {
-                        GivenGenerateTheUsernameAndPassword("random", "random");
-                        WhenVisitTheRegisterAPIWithTheUsernameAndPassword(EndPointStr);
-                        break;
-                    }
-                default:
-                        UserAccount.Username = p0;
-                        break;
-
+                _sharedSteps.ThenShouldGetResponseStatusOf("OK");
+                _sharedSteps.ThenGetResponseBodyWithEqualTo("code", "200");
+                _sharedSteps.ThenWithItemNamedContainingSubstring("message", "success");
             }
-            switch (p1)
+            if (p0 == "RegisteredError")
             {
-                case "random":
-                    UserAccount.Password = FunctionsShared.GetRandomString(8);
-                    break;
-                case "empty":
-                    UserAccount.Password = "";
-                    break;
-                default:
-                        UserAccount.Username = p0;
-                        break;
+                _sharedSteps.ThenShouldGetResponseStatusOf("OK");
+                _sharedSteps.ThenGetResponseBodyWithEqualTo("code", "0");
+                _sharedSteps.ThenGetResponseBodyWithEqualTo("error", "True");
+                _sharedSteps.ThenWithItemNamedContainingSubstring("message", "registered");
             }
-        }
-
-
-        [When(@"visit the register API ""(.*)"" with the username and password")]
-        public void WhenVisitTheRegisterAPIWithTheUsernameAndPassword(string endPoint)
-        {
-            this.EndPointStr = endPoint;
-            RestClient = new RestClient(ConfigurationManager.AppSettings["EStoreBaseURL"]);
-            RestRequest = new RestRequest(EndPointStr, Method.POST);
-            // Content type is not required when adding parameters this way
-            // This will also automatically UrlEncode the values
-            // restRequest.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            //restRequest.AddParameter("username", usernameStr, "application/x-www-form-urlencoded", ParameterType.RequestBody);
-            RestRequest.AddParameter("username", UserAccount.Username, ParameterType.GetOrPost);
-            RestRequest.AddParameter("password", UserAccount.Password, ParameterType.GetOrPost);
-            RestRequest.AddParameter("browserid", UserAccount.Password, ParameterType.GetOrPost);
-            RestResponse = RestClient.Execute(RestRequest);
-        }
-
-
-
-        [Then(@"should get  response  status of (.*)")]
-        public void ThenShouldGetResponseStatusOf(string p0)
-        {
-            Dictionary<string, string> headerList = FunctionsShared.GetResponseHeaderDict(RestResponse);
-            Console.WriteLine(p0);
-            Assert.AreEqual("application/json; charset", headerList["Content-Type"], "Test fail due to the Conten-Type in header is not application json");
-
-            Assert.AreEqual(p0, RestResponse.StatusCode.ToString(), "Test fail due to Response StatusCode is not equal to OK");
+            if (p0 == "UsernameError")
+            {
+                _sharedSteps.ThenShouldGetResponseStatusOf("OK");
+                _sharedSteps.ThenGetResponseBodyWithEqualTo("code", "0");
+                _sharedSteps.ThenGetResponseBodyWithEqualTo("error", "True");
+                _sharedSteps.ThenWithItemNamedContainingSubstring("message", "username");
+            }
+            if (p0 == "PasswordError")
+            {
+                _sharedSteps.ThenShouldGetResponseStatusOf("OK");
+                _sharedSteps.ThenGetResponseBodyWithEqualTo("code", "0");
+                _sharedSteps.ThenGetResponseBodyWithEqualTo("error", "True");
+                _sharedSteps.ThenWithItemNamedContainingSubstring("message", "password");
+            }
 
 
         }
 
-        [Then(@"get response body with ""(.*)""   equal to ""(.*)""")]
-        public void ThenGetResponseBodyWithEqualTo(string p0, string p1)
-        {
-            var jObject = JObject.Parse(RestResponse.Content);
-            string realValueStr = (string)jObject[p0];
-            string expectedValueStr = p1;
-            Assert.AreEqual(expectedValueStr, realValueStr, "Test fail due to return value of"+ p0 + " in response body is not equal to "+ expectedValueStr);
-
+        [Then(@"register should get  \['(.*)'] including '(.*)'")]
+        public void ThenRegisterShouldGetIncluding(string p0, string p1)
+        {            
+            _sharedSteps.ThenGetResponseBodyWithIncluding(p0, p1);
         }
 
-        [Then(@"with new account number in datas")]
-        public void ThenWithNewAccountNumberInDatas()
-        {
-            var jObject = JObject.Parse(RestResponse.Content);
-            string accountNumberStr = (string)jObject["datas"]["accountNumber"];       
-            Assert.GreaterOrEqual(8, accountNumberStr.Length, "Test fail due to accountNumber returned is shorter than 8");
-            UserAccount.AccountNumber = accountNumberStr;
-        }
         
 
 
-        [Then(@"with item named ""(.*)""  contains ""(.*)""")]
-        public void ThenWithItemNamedContains(string p0, string p1)
-        {
-            var jObject = JObject.Parse(RestResponse.Content);
-            string realValueStr = (string)jObject[p0];
-            Assert.IsTrue(realValueStr.ToLower().Contains(p1), "Test fail due to item named '" + p0 + "' returned does not contain value of '" + p1 + "'");
-        }
+
 
 
 

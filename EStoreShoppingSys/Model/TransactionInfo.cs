@@ -8,9 +8,9 @@ namespace EStoreShoppingSys.Model
 {
     class TransactionInfo
     {
-        public int transactionNumber { get; set; }
-        public string accountNumber { get; set; }
-        public double amountDue { get; set; }
-        public List<ProductInfo> items { get; set; }
+        public int TransactionNumber { get; set; }
+        public string AccountNumber { get; set; }
+        public double AmountDue { get; set; }
+        public List<ProductInfo> Items { get; set; }
     }
 }

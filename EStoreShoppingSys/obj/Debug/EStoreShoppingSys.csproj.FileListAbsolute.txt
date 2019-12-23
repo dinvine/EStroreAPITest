@@ -30,7 +30,7 @@ D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys\bin\Debug\TechTalk.SpecFlow
 D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys\bin\Debug\TechTalk.SpecFlow.xml
 D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys\bin\Debug\TechTalk.SpecFlow.NUnit.SpecFlowPlugin.pdb
 D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys\bin\Debug\Utf8Json.xml
-D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys\obj\Debug\EStoreShoppingSys.csprojAssemblyReference.cache
 D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys\obj\Debug\EStoreShoppingSys.csproj.CopyComplete
 D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys\obj\Debug\EStoreShoppingSys.dll
 D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys\obj\Debug\EStoreShoppingSys.pdb
+D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys\obj\Debug\EStoreShoppingSys.csprojAssemblyReference.cache

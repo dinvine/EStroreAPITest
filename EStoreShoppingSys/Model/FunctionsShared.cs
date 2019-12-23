@@ -7,9 +7,9 @@ using RestSharp;
 
 namespace EStoreShoppingSys.Model
 {
-    public static class FunctionsShared
+    public  class FunctionsShared
     {
-        public static string GetRandomString(int length)
+        public string GetRandomString(int length)
         {
             Random r = new Random();
             string rStr = "";            
@@ -21,7 +21,7 @@ namespace EStoreShoppingSys.Model
             return rStr;
         }
 
-        public static Dictionary<string, string> GetResponseHeaderDict(IRestResponse restResponse) {
+        public  Dictionary<string, string> GetResponseHeaderDict(IRestResponse restResponse) {
 
             Dictionary<string, string> headerList = new Dictionary<string, string>();
             string[] keyPairs;
