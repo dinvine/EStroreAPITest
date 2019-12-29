@@ -12,6 +12,13 @@ namespace EStoreShoppingSys.Model
         public string AccountNumber { get; set; }
         public double AmountDue { get; set; }
         public List<ProductInfo> Items { get; set; }
-
+    }
+    class ProductInfo
+    {
+        public int ItemId { get; set; }
+        public string ItemClass { get; set; }
+        public string ItemName { get; set; }
+        public string ItemPrice { get; set; }
+        public string ItemDescription { get; set; }
     }
 }

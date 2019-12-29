@@ -25,6 +25,8 @@ namespace EStoreShoppingSys.Steps
 
             _sharedSteps = new SharedSteps(scenarioContext, p_settings);
 
+            _scenarioContext["browserId"] = "honor";
+
         }
         [When(@"register on '(.*)' with '(.*)' username and '(.*)' password")]
         public void GivenRegisterOnWithUsernameAndPassword(string endPoint, string username, string password)

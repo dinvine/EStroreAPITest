@@ -125,9 +125,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\CartItemAdd.cs" />
+    <Compile Include="Model\CartItemDelete.cs" />
+    <Compile Include="Model\ResponseError.cs" />
+    <Compile Include="src\TempStudyWork.cs" />
+    <Compile Include="Steps\ProductInfoViewSteps.cs" />
+    <Compile Include="Steps\CartInfoViewSteps.cs" />
+    <Compile Include="Steps\CartItemEditSteps.cs" />
     <Compile Include="Model\CartInfo.cs" />
     <Compile Include="Model\FunctionsShared.cs" />
-    <Compile Include="Model\ProductInfo.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Model\TransactionInfo.cs" />
     <Compile Include="Model\UserAccount.cs" />
@@ -136,13 +142,23 @@
     <Compile Include="src\EmployeeDetails.cs" />
     <Compile Include="src\EmployeeInfo.cs" />
     <Compile Include="Steps\CreateAndDeleteCartSteps.cs" />
+    <Compile Include="Steps\PostConditionSteps.cs" />
     <Compile Include="Steps\SharedSteps.cs" />
+    <Compile Include="Steps\TransactionNumberGetSteps.cs" />
+    <Compile Include="Steps\UserAccountDeleteSteps.cs" />
     <Compile Include="Steps\UserAccountRegisterSteps.cs" />
     <Compile Include="Steps\UserLoginSteps.cs" />
+    <Compile Include="Steps\TransactionSaveSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\CreateAndDeleteCart.feature" />
+    <None Include="Features\CartCreateDelete.feature" />
+    <None Include="Features\CartInfoView.feature" />
+    <None Include="Features\CartItemEdit.feature" />
+    <None Include="Features\ProductInfoView.feature" />
+    <None Include="Features\TransactionNumberGet.feature" />
+    <None Include="Features\TransactionSave.feature" />
+    <None Include="Features\UserAccountDelete.feature" />
     <None Include="Features\UserLogin.feature" />
     <None Include="Features\UserAccountRegister.feature" />
     <None Include="packages.config" />

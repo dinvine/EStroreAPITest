@@ -26,39 +26,55 @@ namespace EStoreShoppingSys.Steps
 
         }
 
-        [Given(@"get the valid token on '(.*)'")]
-        public void GivenGetTheValidTokenOn(string endpoint)
+
+
+        [Given(@"CART get the valid token on '(.*)'")]
+        public void GivenCartGetTheValidTokenOn(string endpoint)
         {
             _sharedSteps.GivenGenerateTheUsernameAndPasswordAt("RegisterEndPoint", "random", "random");
             _sharedSteps.WhenVisitTheRegisterAPIWithTheUsernameAndPassword("RegisterEndPoint");
-            _sharedSteps.GivenGetTokenAtEndpoint(endpoint, "valid");
+            _sharedSteps.GivenGetTokenAtEndpoint("valid");
         }
         
-        [Given(@"get the invalid token on '(.*)'")]
-        public void GivenGetTheInvalidTokenOn(string endpoint)
-        {
-            _sharedSteps.GivenGenerateTheUsernameAndPasswordAt("RegisterEndPoint", "random", "random");
-            _sharedSteps.WhenVisitTheRegisterAPIWithTheUsernameAndPassword("RegisterEndPoint");
-            _sharedSteps.GivenGetTokenAtEndpoint(endpoint, "valid");
-            _scenarioContext["accessToken"] = "FakeToken_1.3#0;";
-        }
 
-
-        [Given(@"create cart at '(.*)' with the  token")]
-        [When(@"create cart at '(.*)' with the  token")]
-        public void WhenVisitTheCartAddAPIWithTheToken(string p0)
+        [Given(@"CART create with the  token")]
+        [When(@"CART create with the  token")]
+        public void WhenVisitTheCartAddAPIWithTheToken()
         {
 
             _sharedSteps.GivenCreateCartAtCartCreateEndPoint();
         }
-        
-        [When(@"delete cart at CartDeleteEndPoint with the  token")]
+
+
+        [When(@"CART create  with the  invalid token")]
+        public void WhenCARTCreateAtWithTheInvalidToken()
+        {
+            _scenarioContext["accessToken"] += "####";
+            _sharedSteps.GivenCreateCartAtCartCreateEndPoint();
+            _scenarioContext["accessToken"] = _scenarioContext["accessToken"].ToString().Replace("####", "");
+        }
+
+
+
+
+
+        [When(@"CART delete  with the  token")]
         public void WhenVisitTheCartDeleteAPIWithTheToken()
         {
             _sharedSteps.GivenDeleteCart();
         }
-        
-        [Then(@"Cart  should give  response of '(.*)'")]
+
+        [When(@"CART delete  with the invalid token")]
+        public void WhenCARTDeleteAtWithTheInvalidToken()
+        {
+
+            _scenarioContext["accessToken"] += "invalidToken";
+            _sharedSteps.GivenDeleteCart();
+            _scenarioContext["accessToken"] = _scenarioContext["accessToken"].ToString().Replace("invalidToken", "");
+        }
+
+
+        [Then(@"CART  should give  response of '(.*)'")]
         public void ThenCartShouldGiveResponseOf(string p0)
         {
             if (p0 == "OK")
@@ -74,34 +90,23 @@ namespace EStoreShoppingSys.Steps
                 _sharedSteps.ThenGetResponseBodyWithEqualTo("error", "True");
                 _sharedSteps.ThenWithItemNamedContainingSubstring("message", "没有登录");
             }
-
+            if (p0 == "DuplicateCartError")
+            {
+                _sharedSteps.ThenShouldGetResponseStatusOf("OK");
+                _sharedSteps.ThenGetResponseBodyWithEqualTo("code", "0");
+                _sharedSteps.ThenGetResponseBodyWithEqualTo("error", "True");
+                _sharedSteps.ThenWithItemNamedContainingSubstring("message", "repeated");
+            }         
         }
 
-        [Then(@"CartAdd should give json with '(.*)' containing items '(.*)'")]
-        public void ThenCartAddShouldGiveJsonWithContainingItems(string datas, string items)
+        [Then(@"CART should give json with '(.*)' containing items '(.*)'")]
+        public void ThenCartShouldGiveJsonWithContainingItems(string datas, string items)
         {
             _sharedSteps.ThenGetResponseBodyWithIncluding(datas, items);
             Assert.AreEqual(_scenarioContext["accountNumber"], _scenarioContext["accountNumber~Existing"], "Test fail due to accountNumber in response body is not equal to the one get in registration");
-
+            Assert.AreEqual(_scenarioContext["cartId"], _scenarioContext["cartId~Existing"], "Test fail due to cartId in response body is not equal to the one get in registration");
         }
 
-        [Then(@"CartDelete should give json with '(.*)' containing items '(.*)'")]
-        public void ThenCartDeleteShouldGiveJsonWithContainingItems(string datas, string items)
-        {
-            // ScenarioContext.Current.Pending();
-            _sharedSteps.ThenGetResponseBodyWithIncluding(datas, items);
-
-                Assert.AreEqual(_scenarioContext["accountNumber"], _scenarioContext["accountNumber~Existing"], "Test fail due to accountNumber in response body is not equal to original one");
-            
-  //              Assert.AreEqual(_scenarioContext["cartId"], _scenarioContext["cartId~Existing"], "Test fail due to cartId in response body is not equal to original one");
-
-        }
-
-        [When(@"delete cart at '(.*)' with the invalid token")]
-        public void WhenDeleteCartAtWithTheInvalidToken(string p0)
-        {
-         //   ScenarioContext.Current.Pending();
-        }
 
     }
 }

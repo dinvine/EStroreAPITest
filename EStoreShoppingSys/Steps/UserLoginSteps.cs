@@ -47,7 +47,7 @@ namespace EStoreShoppingSys.Steps
         [When(@"visit the token API '(.*)' with the  '(.*)' credential")]
         public void WhenVisitTheTokenAPIWithTheCredential(string endpoint, string credentialIsValid)
         {
-            _sharedSteps.GivenGetTokenAtEndpoint(endpoint, credentialIsValid);
+            _sharedSteps.GivenGetTokenAtEndpoint(credentialIsValid);
         }
         
     [Then(@"TokenAPI  should give  response of '(.*)'")]
