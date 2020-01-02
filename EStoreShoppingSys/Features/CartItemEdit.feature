@@ -55,9 +55,3 @@ And  CARTADDITEM delete the items in table to cart
 | 2			| 1        | 550   | 550       |
 Then CARTADDITEM  should give  response of 'InvalidItemError'
 
-Scenario: Should fail to check cart info with invalid credential
-	Given CARTADDITEM add the items in table to cart
-| itemId | quantity | price | amount    |
-| 1      | 1        | 550   | 550       |
-When CARTADDITEM check cart info with invalid credential
-Then CARTADDITEM  should give  response of 'TokenError'

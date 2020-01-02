@@ -16,5 +16,6 @@ Scenario: fail  to view cart info with invalid credential
 Scenario: fail  to view cart info with invalid cartid
 	Given CartInfo Register And Login And CreateCart
 	When CartInfo visit the cart info API with invalid accountNumber
+	# (X)  the API give  response of 'ok' instead ! 
 	Then CartInfo should give  response of 'accountNumberError'
-	# the API give  response of 'ok' instead ! 
+	

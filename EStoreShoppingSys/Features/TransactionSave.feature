@@ -34,7 +34,7 @@ Scenario: Should Fail to save items into transaction with invalid itemid
 	When TransactionSave add the items in table to transaction
 | itemId | itemName              | quantity | price | amount	|
 | 0      | Apple Watch Series 4  | 1        | 550   | 550		|
-	# assume the response return fail , but the real API return the success, so the code below can not be tested.
+	# (X) assume the response return fail , but the real API return the success, so the code below can not be tested.
 	Then TransactionSave  should give  response of 'InvalidItemError'
 
 
@@ -43,7 +43,7 @@ Scenario: Should Fail to save items into transaction with invalid accountNumber
 	When TransactionSave add the items in table to transaction with invalid accountNumber
 | itemId | itemName              | quantity | price | amount	|
 | 0      | Apple Watch Series 4  | 1        | 550   | 550		|
-	# assume the response return fail , but the real API return the success, so the code below can not be tested.
+	# (X)  assume the response return fail , but the real API return the success, so the code below can not be tested.
 	Then TransactionSave  should give  response of 'InvalidAccountNumberError'
 
 Scenario: Should Fail to save items into transaction with invalid transactionNumber

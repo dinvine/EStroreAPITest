@@ -11,6 +11,7 @@ using RestSharp.Authenticators;
 
 
 
+
 namespace EStoreShoppingSys.Steps
 {
     [Binding]
@@ -20,12 +21,12 @@ namespace EStoreShoppingSys.Steps
 
         private readonly ScenarioContext context;
         private readonly Settings _settings ;
-        readonly FunctionsShared funcs ;
+       // readonly FunctionsShared  funcs ;
         public SharedSteps(ScenarioContext injectedContext, Settings p_settings)
         {
             context = injectedContext;
             _settings = p_settings;
-            funcs = new FunctionsShared();
+          //  funcs = new FunctionsShared();
         }
 
 
@@ -67,29 +68,31 @@ namespace EStoreShoppingSys.Steps
             }
             //execute request
             _settings.MyRestResponse = _settings.MyRestClient.Execute(_settings.MyRestRequest);
+            context["settings"] = _settings;
         }
-        /*
-        [Given(@"Request with header and body in URLEncodedForm and get typed response")]
-        public void PostRequestAndGetTypedResponse(string baseUrlEStoreBaseURL, Method method, string endPointURL, RequestParams requestParams, Type R_type)
+
+
+        [Given(@"Request  in URLEncodedForm and validate the response")]
+        public void RequestInURLEncodedFromAndValidateTheResponse(string baseUrlEStoreBaseURL, Method method, string endPointURL, RequestParams requestParams, Type R_type)
         {
             _settings.MyRestClient = new RestClient(ConfigurationManager.AppSettings[baseUrlEStoreBaseURL]);
             if (context.ContainsKey("accessToken"))
             {
                 var authenticator = new JwtAuthenticator(context["accessToken"].ToString());
-        _settings.MyRestClient.Authenticator = authenticator;
+                _settings.MyRestClient.Authenticator = authenticator;
             }
             if (context.ContainsKey("cookie_token_1") && context.ContainsKey("cookie_token_2"))
             {
                 CookieContainer cookiecon = new CookieContainer();
-    string[] items = context["cookie_token_1"].ToString().Split('#');
-    cookiecon.Add(new Cookie(items[0], items[1], items[2], items[3]));
+                string[] items = context["cookie_token_1"].ToString().Split('#');
+                cookiecon.Add(new Cookie(items[0], items[1], items[2], items[3]));
                 items = context["cookie_token_2"].ToString().Split('#');
-    cookiecon.Add(new Cookie(items[0], items[1], items[2], items[3]));
+                cookiecon.Add(new Cookie(items[0], items[1], items[2], items[3]));
                 _settings.MyRestClient.CookieContainer = cookiecon;
             }
 
-//create cookiecon to save cookies in previous response
-_settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings[endPointURL], method);
+            //create cookiecon to save cookies in previous response
+            _settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings[endPointURL], method);
             foreach (KeyValuePair<string, string> kvPairs in requestParams.Headers)
             {
                 _settings.MyRestRequest.AddHeader(kvPairs.Key, kvPairs.Value);
@@ -105,16 +108,19 @@ _settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings[endPo
                 _settings.MyRestRequest.AddQueryParameter(kvPairs.Key, kvPairs.Value);
             }
             //execute request
-            _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsync<CartInfo>(_settings.MyRestRequest);
-            _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsyncRequest<CartInfo>(_settings.MyRestRequest).GetAwaiter().GetResult();
+            //            _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsync<CartInfo>(_settings.MyRestRequest);
+                        _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsyncRequest<CartInfo>(_settings.MyRestRequest).GetAwaiter().GetResult();
+            //funcs.ExecuteAsyncReques<CartInfo>
+
             //_settings.Response = _settings.RestClient.ExecuteAsyncRequest<Authentications>(_settings.Request).GetAwaiter().GetResult();
         }
-        */
+
+
         [Then(@"should get  response  status of (.*)")]
         //should get  response status of OK
         public void ThenShouldGetResponseStatusOf(string p0)
         {
-            Dictionary<string, string> headerList = funcs.GetResponseHeaderDict(_settings.MyRestResponse);
+            Dictionary<string, string> headerList = FunctionsShared.GetResponseHeaderDict(_settings.MyRestResponse);
             Console.WriteLine(p0);
             Assert.AreEqual("application/json; charset", headerList["Content-Type"], "Test fail due to the Conten-Type in header is not application json");
 
@@ -134,7 +140,7 @@ _settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings[endPo
 
 
         [Then(@"get response body with ['(.*)']['(.*)']   equal to '(.*)'")]
-        //get response body with 'code'   equal to '200'
+        //get response body with [datas][account_number]   equal to '1234567'
         public void ThenGetResponseJsonWith2LevelItemEqualTo(string datas, string item, string expectedValue)
         {
             var jObject = JObject.Parse(_settings.MyRestResponse.Content);
@@ -218,7 +224,7 @@ _settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings[endPo
             switch (p_username)
             {
                 case "random":
-                    context["username"] = funcs.GetRandomString(8);
+                    context["username"] = FunctionsShared.GetRandomString(8);
                     break;
                 case "empty":
                     context["username"] = "";
@@ -238,7 +244,7 @@ _settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings[endPo
             {
                 case "random":
                     if(p_username!="existing")
-                    context["password"] = funcs.GetRandomString(8);
+                    context["password"] = FunctionsShared.GetRandomString(8);
                     break;
                 case "empty":
                     context["password"] = "";
@@ -258,15 +264,9 @@ _settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings[endPo
             string baseUrlEStoreBaseURL = "EStoreBaseURL";
             string endPointURL = endPoint;
             RequestParams requestParams = new RequestParams();
-            //headers
-            //requestParams.Headers.Add("browserId", context["browserId"].ToString());
-            //parameters
             requestParams.Parameters.Add("username", context["username"].ToString());
             requestParams.Parameters.Add("password", context["password"].ToString());
-            //QueryParameters
-            //requestParams.QueryParameters.Add("cartId", context["cartId"].ToString());
             RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams);
-            //set context["accountNumber"]:
             var jObject = JObject.Parse(_settings.MyRestResponse.Content);
             if (jObject["code"].ToString() == "200")
                 ThenGetResponseBodyWithIncluding("datas", "accountNumber");
@@ -281,14 +281,9 @@ _settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings[endPo
                 string baseUrlEStoreBaseURL = "EStoreBaseURL";
                 string endPointURL = "TokenEndPoint";
                 RequestParams requestParams = new RequestParams();
-                //headers
-                //requestParams.Headers.Add("browserId", context["browserId"].ToString());
-                //parameters
                 requestParams.Parameters.Add("username", context["username"].ToString());
                 requestParams.Parameters.Add("password", context["password"].ToString());
                 requestParams.Parameters.Add("browserid", context["browserId"].ToString());
-                //QueryParameters
-                //requestParams.QueryParameters.Add("cartId", context["cartId"].ToString());
                 RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams);
 
                 
@@ -362,10 +357,6 @@ _settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings[endPo
             GivenCreateCartAtCartCreateEndPoint();
             Console.WriteLine(_settings.MyRestResponse.Content);
 
-
-
-            // StaticSettings.contextStaic = context;
-            // StaticSettings.settingStatic = _settings;
         }
         [Given(@"add the valid items table to cart")]
         public void GivenAddTheValidItemsTableToCart(Table table)
@@ -489,9 +480,6 @@ _settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings[endPo
                 context["accountNumber_deleted"] = context["accountNumber"];
                 context.Remove("accountNumber");
             }
-  //              ThenGetResponseBodyWithIncluding("datas", "cartId,accountNumber");
-  //           Assert.AreEqual(context["accountNumber"], context["accountNumber~Existing"], "Test fail due to accountNumber in response body is not equal to the one get in registration");
-  //          Assert.AreEqual(context["cartId"], context["cartId~Existing"], "Test fail due to cartId in response body is not equal to the one get in registration");
         }
 
         [When(@"get cart info")]
@@ -509,6 +497,7 @@ _settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings[endPo
             requestParams.QueryParameters.Add("account_number", context["accountNumber"].ToString());
             RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams);
 
+            context["settings"] = _settings;
             var jObject = JObject.Parse(_settings.MyRestResponse.Content);
             return jObject;
         }
@@ -569,8 +558,6 @@ _settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings[endPo
             itemsString = itemsString.Substring(0, itemsString.Length - 1);
             amountDue = Math.Round(amountDue, 2);
             context["transactionAmountDue"] = amountDue.ToString();
-
-
 
 
             string baseUrlEStoreBaseURL = "EStoreBaseURL";

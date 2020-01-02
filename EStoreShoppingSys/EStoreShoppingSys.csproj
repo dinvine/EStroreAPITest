@@ -156,6 +156,7 @@
     <None Include="Features\CartInfoView.feature" />
     <None Include="Features\CartItemEdit.feature" />
     <None Include="Features\ProductInfoView.feature" />
+    <None Include="Features\SpecFlowTryOutStudy.feature" />
     <None Include="Features\TransactionNumberGet.feature" />
     <None Include="Features\TransactionSave.feature" />
     <None Include="Features\UserAccountDelete.feature" />
