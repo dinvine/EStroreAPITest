@@ -12,4 +12,4 @@ Scenario: success  to obtain transaction number with valid credential
 Scenario: fail  to obtain transaction number with invalid credential
 	Given Register And Login And Create Cart
 	When TransactionNumber get with invalid credential
-	Then should get  response of 'TokenError'
+	Then should get  response of 'CredentialError'

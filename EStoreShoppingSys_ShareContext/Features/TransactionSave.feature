@@ -43,7 +43,7 @@ Scenario: Should Fail to save items into transaction with invalid accountNumber
 	Given TransactionSave get transaction number
 	When TransactionSave add the items in table to transaction with invalid accountNumber
 | itemId | itemName              | quantity | price | amount	|
-| 0      | Apple Watch Series 4  | 1        | 550   | 550		|
+| 1      | Apple Watch Series 4  | 1        | 550   | 550		|
 	# (X)  assume the response return fail , but the real API return the success, so the code below can not be tested.
 	Then should get  response of 'AccountNumberError'
 
@@ -51,6 +51,5 @@ Scenario: Should Fail to save items into transaction with invalid transactionNum
 	Given TransactionSave get transaction number
 	When TransactionSave add the items in table to transaction with invalid transactionNumber
 | itemId | itemName              | quantity | price | amount	|
-| 0      | Apple Watch Series 4  | 1        | 550   | 550		|
-	# assume the response return fail , but the real API return the success, so the code below can not be tested.
-	Then should get  response of 'InvalidtransactionNumberError'
+| 1      | Apple Watch Series 4  | 1        | 550   | 550		|
+	Then should get  response of 'InvalidTransactionNumberError'

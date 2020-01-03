@@ -34,7 +34,10 @@ namespace EStoreShoppingSys.Steps
         public void GivenRegisterOnWithUsernameAndPassword(string username, string password)
         {
             _sharedSteps.GivenGenerateTheUsernameAndPasswordAt( username, password);
-            _sharedSteps.WhenVisitTheRegisterAPIWithTheUsernameAndPassword();
+            if(username=="random"&&password=="random")
+                _sharedSteps.WhenVisitTheRegisterAPIWithTheUsernameAndPassword("UserAccount");
+            else
+                _sharedSteps.WhenVisitTheRegisterAPIWithTheUsernameAndPassword("ResponseError");
         }
 
 

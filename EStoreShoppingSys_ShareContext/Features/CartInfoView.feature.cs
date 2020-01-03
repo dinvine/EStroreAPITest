@@ -149,7 +149,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("CartInfo visit the cart info API with invalid credential", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 14
- testRunner.Then("should get  response of \'TokenError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("should get  response of \'CredentialError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

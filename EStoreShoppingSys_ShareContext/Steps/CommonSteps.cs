@@ -77,7 +77,7 @@ namespace EStoreShoppingSys.Steps
 
 
         [Given(@"Request  in URLEncodedForm and validate the response")]
-        public void RequestInURLEncodedFromAndValidateTheResponse(string baseUrlEStoreBaseURL, Method method, string endPointURL, RequestParams requestParams, Type R_type)
+        public void RequestInURLEncodedFromAndValidateTheResponse(string baseUrlEStoreBaseURL, Method method, string endPointURL, RequestParams requestParams, string ResponseModelName)
         {
             _settings.MyRestClient = new RestClient(ConfigurationManager.AppSettings[baseUrlEStoreBaseURL]);
             if (context.ContainsKey("accessToken"))
@@ -111,9 +111,59 @@ namespace EStoreShoppingSys.Steps
             {
                 _settings.MyRestRequest.AddQueryParameter(kvPairs.Key, kvPairs.Value);
             }
-            //execute request
-            //            _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsync<CartInfo>(_settings.MyRestRequest);
-                        _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsyncRequest<CartInfo>(_settings.MyRestRequest).GetAwaiter().GetResult();
+
+            switch (ResponseModelName)
+            {
+                case "ResponseError":
+                    _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsyncRequest<ResponseError>(_settings.MyRestRequest).GetAwaiter().GetResult();
+                    break;
+                case "UserAccount":
+                    _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsyncRequest<UserAccount>(_settings.MyRestRequest).GetAwaiter().GetResult();
+                    break;
+                case "UserAccountDelete":
+                    _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsyncRequest<UserAccountDelete>(_settings.MyRestRequest).GetAwaiter().GetResult();
+                    break;
+
+                case "UserLogin":
+                    _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsyncRequest<UserLogin>(_settings.MyRestRequest).GetAwaiter().GetResult();
+                    break;
+                case "CartInfo":
+                    _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsyncRequest<CartInfo>(_settings.MyRestRequest).GetAwaiter().GetResult();
+                    break;
+                case "CartItemAdd":
+                    _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsyncRequest<CartItemAdd>(_settings.MyRestRequest).GetAwaiter().GetResult();
+                    break;
+                case "CartItemDelete":
+                    _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsyncRequest<CartItemDelete>(_settings.MyRestRequest).GetAwaiter().GetResult();
+                    break;
+                case "CartDelete":
+                    _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsyncRequest<CartDelete>(_settings.MyRestRequest).GetAwaiter().GetResult();
+                    break;
+                case "CartCreate":
+                    _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsyncRequest<CartCreate>(_settings.MyRestRequest).GetAwaiter().GetResult();
+                    break;
+                case "TransactionSave":
+                    _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsyncRequest<TransactionSave>(_settings.MyRestRequest).GetAwaiter().GetResult();
+                    break;
+                case "TransactionNumber":
+                    _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsyncRequest<TransactionNumber>(_settings.MyRestRequest).GetAwaiter().GetResult();
+                    break;
+
+                case "ProductList":
+                    _settings.MyRestResponse = _settings.MyRestClient.ExecuteAsyncRequest<ProductList>(_settings.MyRestRequest).GetAwaiter().GetResult();
+                    break;
+                    
+
+                default:
+                    _settings.MyRestResponse = _settings.MyRestClient.Execute(_settings.MyRestRequest);
+                    _settings.MyRestResponse.Content = "No validate model defined";
+                    break;
+            }
+            
+
+                        
+
+
             //funcs.ExecuteAsyncReques<CartInfo>
 
             //_settings.Response = _settings.RestClient.ExecuteAsyncRequest<Authentications>(_settings.Request).GetAwaiter().GetResult();
@@ -281,9 +331,13 @@ namespace EStoreShoppingSys.Steps
                     case "InvalidCartError":
                         msgSubString = "cartid";
                         break;
-                    case "InvalidtransactionNumberError":
-                        msgSubString = "transaction number";
+                    case "InvalidTransactionNumberError":
+                        msgSubString = "unexpected";
                         break;
+                    case "unexpected":
+                        msgSubString = "unexpected";
+                        break;
+                        
                     default:
                         msgSubString = "undefined message code "+p0;
                         break;
@@ -308,7 +362,7 @@ namespace EStoreShoppingSys.Steps
                 case "existing":
                     {
                         GivenGenerateTheUsernameAndPasswordAt( "random", "random");
-                        WhenVisitTheRegisterAPIWithTheUsernameAndPassword();
+                        WhenVisitTheRegisterAPIWithTheUsernameAndPassword("UserAccount");
                         break;
                     }
                 default:
@@ -335,14 +389,20 @@ namespace EStoreShoppingSys.Steps
 
         [When(@"visit the register API '(.*)' with the username and password")]
         //visit the register API 'RegisterEndPoint' with the username and password
-        public void WhenVisitTheRegisterAPIWithTheUsernameAndPassword()
+        public void WhenVisitTheRegisterAPIWithTheUsernameAndPassword(string expectCode)
         {
             string baseUrlEStoreBaseURL = "EStoreBaseURL";
             string endPointURL = "RegisterEndPoint";
             RequestParams requestParams = new RequestParams();
             requestParams.Parameters.Add("username", context["username"].ToString());
             requestParams.Parameters.Add("password", context["password"].ToString());
-            RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams);
+            //RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams);
+            if (expectCode == "UserAccount")
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams, "UserAccount");
+            else
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams, "ResponseError");
+
+
             var jObject = JObject.Parse(_settings.MyRestResponse.Content);
             if (jObject["code"].ToString() == "200")
                 ThenGetResponseBodyWithIncluding("datas", "accountNumber");
@@ -362,8 +422,8 @@ namespace EStoreShoppingSys.Steps
                 requestParams.Parameters.Add("password", context["password"].ToString());
                 requestParams.Parameters.Add("browserid", context["browserId"].ToString());
                 RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams);
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams, "UserLogin");
 
-                
                 // _settings.MyRestResponse.Cookies
                 ThenShouldGetResponseStatusOf("OK");
                 ThenGetResponseBodyWithEqualTo("code", "200");
@@ -385,12 +445,15 @@ namespace EStoreShoppingSys.Steps
             }
             if (isOrNotValid == "invalid")
             {
-                _settings.MyRestClient = new RestClient(ConfigurationManager.AppSettings["EStoreBaseURL"]);
-                _settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings["TokenEndPoint"], Method.POST);
-                _settings.MyRestRequest.AddParameter("username", context["username"], ParameterType.GetOrPost);
-                _settings.MyRestRequest.AddParameter("password", context["password"], ParameterType.GetOrPost);
-                _settings.MyRestRequest.AddParameter("browserid", context["browserId"], ParameterType.GetOrPost);
-                _settings.MyRestResponse = _settings.MyRestClient.Execute(_settings.MyRestRequest);
+                string baseUrlEStoreBaseURL = "EStoreBaseURL";
+                string endPointURL = "TokenEndPoint";
+                RequestParams requestParams = new RequestParams();
+                requestParams.Parameters.Add("username", context["username"].ToString());
+                requestParams.Parameters.Add("password", context["password"].ToString());
+                requestParams.Parameters.Add("browserid", context["browserId"].ToString());
+                RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams);
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams, "ResponseError");
+
                 ThenShouldGetResponseStatusOf("OK");
                 ThenGetResponseBodyWithEqualTo("code", "0");
                 ThenGetResponseBodyWithEqualTo("error", "True");
@@ -404,6 +467,10 @@ namespace EStoreShoppingSys.Steps
         [When(@"CART create with the  token")]
         public void GivenCreateCartAtCartCreateEndPoint()
         {
+            GivenCreateCartAtCartCreateEndPoint("CartCreate");
+        }
+        public void GivenCreateCartAtCartCreateEndPoint(string expectCode= "CartCreate")
+        {
             string baseUrlEStoreBaseURL = "EStoreBaseURL";
             string endPointURL = "CartCreateEndPoint";
             RequestParams requestParams = new RequestParams();
@@ -414,7 +481,11 @@ namespace EStoreShoppingSys.Steps
             requestParams.Parameters.Add("accountNumber", context["accountNumber"].ToString());
             //QueryParameters
             //requestParams.QueryParameters.Add(-------------);
-            RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams);
+            //            RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams);
+            if (expectCode == "CartCreate")
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams, "CartCreate");
+            else
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams, "ResponseError");
 
             var jObject = JObject.Parse(_settings.MyRestResponse.Content);
             if (jObject["code"].ToString() == "200")
@@ -429,7 +500,7 @@ namespace EStoreShoppingSys.Steps
         {
             GivenGenerateTheUsernameAndPasswordAt("random", "random");
             Console.WriteLine(context["username"]);
-            WhenVisitTheRegisterAPIWithTheUsernameAndPassword();
+            WhenVisitTheRegisterAPIWithTheUsernameAndPassword("UserAccount");
             Console.WriteLine(_settings.MyRestResponse.Content);
             GivenGetTokenAtEndpoint("valid");
             Console.WriteLine(_settings.MyRestResponse.Content);
@@ -438,12 +509,16 @@ namespace EStoreShoppingSys.Steps
 
         }
         [Given(@"add the valid items table to cart")]
-        public void GivenAddTheValidItemsTableToCart(Table table)
+        public void GivenAddTheValidItemsTableToCart(Table table) {
+            GivenAddTheValidItemsTableToCart( table, "CartItemAdd");
+        }
+
+        public void GivenAddTheValidItemsTableToCart(Table table,string expectCode= "CartItemAdd")
         {
             Double amountDue = 0;
             foreach(var row in table.Rows)
             {
-                GivenAddOneRecordOfItemToCart(row[0].Trim(), row[1].Trim());
+                GivenAddOneRecordOfItemToCart(row[0].Trim(), row[1].Trim(), expectCode);
                 amountDue += Double.Parse(row[3].Trim());
             }
             amountDue = Math.Round(amountDue, 2);
@@ -451,7 +526,7 @@ namespace EStoreShoppingSys.Steps
         }
 
         [Given(@"add one record of  item to cart")]
-        public void GivenAddOneRecordOfItemToCart(string itemId, string quantity)
+        public void GivenAddOneRecordOfItemToCart(string itemId, string quantity,string expectCode="CartItemAdd")
         {
             string baseUrlEStoreBaseURL = "EStoreBaseURL";
             string endPointURL = "CartAddItemEndPoint";
@@ -467,8 +542,14 @@ namespace EStoreShoppingSys.Steps
             requestParams.Parameters.Add("quantity", itemQty.ToString());
             //QueryParameters
             //requestParams.QueryParameters.Add(-------------);
-            RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams);
-            
+            //RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams);
+
+            if (expectCode == "CartItemAdd")
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams, "CartItemAdd");
+            else
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams, "ResponseError");
+
+
             var jObject = JObject.Parse(_settings.MyRestResponse.Content);
             if (jObject["code"].ToString() == "200")
             {
@@ -480,7 +561,7 @@ namespace EStoreShoppingSys.Steps
 
 
         [Given(@"delete one record of  item from cart")]
-        public void GivenDeleteOneRecordOfItemFromCart(string itemId)
+        public void GivenDeleteOneRecordOfItemFromCart(string itemId,string expectCode)
         {
             string baseUrlEStoreBaseURL = "EStoreBaseURL";
             string endPointURL = "CartDeleteItemEndPoint";
@@ -494,7 +575,13 @@ namespace EStoreShoppingSys.Steps
             //QueryParameters
             //requestParams.QueryParameters.Add(-------------);
 
-            RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.DELETE, endPointURL, requestParams);
+            //RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.DELETE, endPointURL, requestParams);
+
+            if (expectCode == "CartItemDelete")
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.DELETE, endPointURL, requestParams, "CartItemDelete");
+            else
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.DELETE, endPointURL, requestParams, "ResponseError");
+
 
             var jObject = JObject.Parse(_settings.MyRestResponse.Content);
             if (jObject["code"].ToString() == "200")
@@ -510,6 +597,12 @@ namespace EStoreShoppingSys.Steps
         [Given(@"CART delete  with the  token")]
         public void GivenDeleteCart()
         {
+
+            GivenDeleteCart("CartDelete");
+        }
+
+        public void GivenDeleteCart(string expectCode="CartDelete")
+        {
             if (!context.ContainsKey("cartId")) return;
 
             string baseUrlEStoreBaseURL = "EStoreBaseURL";
@@ -522,20 +615,29 @@ namespace EStoreShoppingSys.Steps
             requestParams.Parameters.Add("cartId", context["cartId"].ToString());
             //QueryParameters
             //requestParams.QueryParameters.Add(-------------);
-            RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.DELETE, endPointURL, requestParams);
+            // RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.DELETE, endPointURL, requestParams);
+            if (expectCode == "CartDelete")
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.DELETE, endPointURL, requestParams, "CartDelete");
+            else
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.DELETE, endPointURL, requestParams, "ResponseError");
 
 
- //           var jObject = JObject.Parse(_settings.MyRestResponse.Content);
- //           if (jObject["code"].ToString() == "200"&& jObject["datas"]["cartId"].ToString()== context["cartId"].ToString())
- //               context.Remove("cartId");
- //               ThenGetResponseBodyWithIncluding("datas", "cartId,accountNumber");
- //            Assert.AreEqual(context["accountNumber"], context["accountNumber~Existing"], "Test fail due to accountNumber in response body is not equal to the one get in registration");
- //            Assert.AreEqual(context["cartId"], context["cartId~Existing"], "Test fail due to cartId in response body is not equal to the one get in registration");
+            //           var jObject = JObject.Parse(_settings.MyRestResponse.Content);
+            //           if (jObject["code"].ToString() == "200"&& jObject["datas"]["cartId"].ToString()== context["cartId"].ToString())
+            //               context.Remove("cartId");
+            //               ThenGetResponseBodyWithIncluding("datas", "cartId,accountNumber");
+            //            Assert.AreEqual(context["accountNumber"], context["accountNumber~Existing"], "Test fail due to accountNumber in response body is not equal to the one get in registration");
+            //            Assert.AreEqual(context["cartId"], context["cartId~Existing"], "Test fail due to cartId in response body is not equal to the one get in registration");
         }
 
         [When(@"delete  account")]
         [Given(@"delete  account")]
         public void GivenDeleteAccount()
+        {
+            GivenDeleteAccount("UserAccountDelete");
+        }
+
+        public void GivenDeleteAccount(string expectCode="UserAccountDelete")
         {
             if (!context.ContainsKey("accountNumber")) return;
             //create cookiecon to save cookies in previous response
@@ -553,9 +655,14 @@ namespace EStoreShoppingSys.Steps
             //requestParams.Parameters.Add(-------------);
             //QueryParameters
             requestParams.QueryParameters.Add("account_number", context["accountNumber"].ToString());
-            RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.DELETE, endPointURL, requestParams);
+            //RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.DELETE, endPointURL, requestParams);
             
-           var jObject = JObject.Parse(_settings.MyRestResponse.Content);
+            if (expectCode == "UserAccountDelete")
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.DELETE, endPointURL, requestParams, "UserAccountDelete");
+            else
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.DELETE, endPointURL, requestParams, "ResponseError");
+                
+            var jObject = JObject.Parse(_settings.MyRestResponse.Content);
             if (jObject["code"].ToString() == "200")
             {
                 context["accountNumber_deleted"] = context["accountNumber"];
@@ -567,18 +674,33 @@ namespace EStoreShoppingSys.Steps
         [When(@"get product info list")]
         public void GetProductInfoList()
         {
+            GetProductInfoList("ProductList");
+        }
+        public void GetProductInfoList(string expectCode= "ProductList")
+        {
             string baseUrlEStoreBaseURL = "EStoreBaseURL";
             string endPointURL = "ProductInfoEndPoint";
             RequestParams requestParams = new RequestParams();
             //headers
             requestParams.Headers.Add("browserId", context["browserId"].ToString());
             requestParams.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-            RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams);
+            //RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams);
+
+            if (expectCode == "ProductList")
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams, "ProductList");
+            else
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams, "ResponseError");
+
         }
 
         [When(@"get transaction number")]
         [Given(@"get transaction number")]
         public void GetTransactionNumber()
+        {
+            GetTransactionNumber("TransactionNumber");
+        }
+
+        public void GetTransactionNumber(string expectCode="TransactionNumber")
         {
             string baseUrlEStoreBaseURL = "EStoreBaseURL";
             string endPointURL = "TransactionNumberEndPoint";
@@ -586,7 +708,11 @@ namespace EStoreShoppingSys.Steps
             //headers
             requestParams.Headers.Add("browserId", context["browserId"].ToString());
             requestParams.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-            RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams);
+            //RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams);
+            if (expectCode == "TransactionNumber")
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams, "TransactionNumber");
+            else
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams, "ResponseError");
 
             var jObject = JObject.Parse(_settings.MyRestResponse.Content);
             if (jObject["code"].ToString() == "200")
@@ -605,7 +731,7 @@ namespace EStoreShoppingSys.Steps
         }
 
         [When(@"save the items table to transaction")]
-        public void GivenSaveTheItemsTableToTransaction(Table table)
+        public void GivenSaveTheItemsTableToTransaction(Table table,string expectCode= "TransactionSave")
         {
             Double amountDue = 0;
 
@@ -619,7 +745,7 @@ namespace EStoreShoppingSys.Steps
                 itemsString += "\"" + (table.Header as string[])[3] + "\":\"" + itemRow[3] + "\"},";
                 amountDue += Double.Parse(itemRow[4].Trim());
             }
-            itemsString = itemsString.Substring(0, itemsString.Length - 1);
+            itemsString = itemsString.Substring(0, itemsString.Length - 1)+"]";
             amountDue = Math.Round(amountDue, 2);
             context["transactionAmountDue"] = amountDue.ToString();
 
@@ -635,7 +761,13 @@ namespace EStoreShoppingSys.Steps
             requestParams.Parameters.Add("accountNumber", context["accountNumber"].ToString());
             requestParams.Parameters.Add("totalAmountDue", context["transactionAmountDue"].ToString());
              requestParams.Parameters.Add("items", itemsString);
-            RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams);
+            //RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams);
+            if (expectCode == "TransactionSave")
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams, "TransactionSave");
+            else
+                RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.POST, endPointURL, requestParams, "ResponseError");
+
+
 
         }
 

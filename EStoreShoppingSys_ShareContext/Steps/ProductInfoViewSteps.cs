@@ -33,7 +33,7 @@ namespace EStoreShoppingSys.Steps
         public void WhenProductInfoVisitTheCartInfoAPIWithInvalidCredential()
         {
             context["accessToken"] = "Invalid" + context["accessToken"];
-            _sharedSteps.GetProductInfoList();
+            _sharedSteps.GetProductInfoList("invalidToken");
             context["accessToken"] = context["accessToken"].ToString().Replace("Invalid", "");
         }
         

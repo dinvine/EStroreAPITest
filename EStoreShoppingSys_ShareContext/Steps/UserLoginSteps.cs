@@ -32,7 +32,7 @@ namespace EStoreShoppingSys.Steps
         public void GivenGetTheExistingUsernameAndPassword(string endpoint)
         {
             _sharedSteps.GivenGenerateTheUsernameAndPasswordAt( "random", "random");
-            _sharedSteps.WhenVisitTheRegisterAPIWithTheUsernameAndPassword();
+            _sharedSteps.WhenVisitTheRegisterAPIWithTheUsernameAndPassword("0");
         }
 
 
@@ -55,7 +55,7 @@ namespace EStoreShoppingSys.Steps
         public void GivenRegisterOnWithUsernameAndPassword()
         {
             _sharedSteps.GivenGenerateTheUsernameAndPasswordAt("random", "random");
-            _sharedSteps.WhenVisitTheRegisterAPIWithTheUsernameAndPassword();
+            _sharedSteps.WhenVisitTheRegisterAPIWithTheUsernameAndPassword("UserAccount");
             _sharedSteps.GivenGetTokenAtEndpoint("valid");
         }
 

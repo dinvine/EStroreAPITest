@@ -14,7 +14,7 @@ Scenario: success to obtain token by valid credential
 Scenario: fail to obtain token by invalid credential
 	Given get the unregisted username and password
 	When get token with 'invalid' credential
-	Then should get  response of 'CredentialError'
+	Then should get  response of 'UsernameError'
 
 
 	

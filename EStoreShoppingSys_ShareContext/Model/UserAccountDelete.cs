@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EStoreShoppingSys.Model
 {
-    class TransactionSave
+    class UserAccountDelete
     {
         public int code { get; set; }
         public string datas { get; set; }

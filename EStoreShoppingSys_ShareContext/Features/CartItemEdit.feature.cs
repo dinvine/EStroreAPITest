@@ -189,11 +189,11 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Success to Delete Items from the cart")]
-        public virtual void SuccessToDeleteItemsFromTheCart()
+        [NUnit.Framework.DescriptionAttribute("Should fail to add items to cart with invalid credential")]
+        public virtual void ShouldFailToAddItemsToCartWithInvalidCredential()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Success to Delete Items from the cart", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should fail to add items to cart with invalid credential", null, ((string[])(null)));
 #line 28
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -227,18 +227,44 @@ this.FeatureBackground();
                             "1",
                             "550",
                             "550"});
-                table11.AddRow(new string[] {
-                            "2",
-                            "99",
-                            "24.95",
-                            "2470.05"});
-                table11.AddRow(new string[] {
-                            "3",
-                            "999",
-                            "22.5",
-                            "22477.5"});
 #line 29
- testRunner.Given("add the valid items table to cart", ((string)(null)), table11, "Given ");
+testRunner.Given("CARTADDITEM add the valid items table to cart with invalid credential", ((string)(null)), table11, "Given ");
+#line hidden
+#line 32
+testRunner.Then("should get  response of \'CredentialError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should fail to add items to cart with invalid itemid")]
+        public virtual void ShouldFailToAddItemsToCartWithInvalidItemid()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should fail to add items to cart with invalid itemid", null, ((string[])(null)));
+#line 34
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 7
+this.FeatureBackground();
 #line hidden
                 TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "itemId",
@@ -246,15 +272,48 @@ this.FeatureBackground();
                             "price",
                             "amount"});
                 table12.AddRow(new string[] {
-                            "1",
+                            "999999",
                             "1",
                             "550",
                             "550"});
-#line 34
- testRunner.When("CARTADDITEM delete the items in table from cart", ((string)(null)), table12, "When ");
+#line 35
+testRunner.Given("CARTADDITEM add the invalid items table to cart", ((string)(null)), table12, "Given ");
 #line hidden
-#line 37
- testRunner.Then("should get  response of \'OK\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 38
+testRunner.Then("should get  response of \'InvalidItemError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should fail to add items to cart with invalid cartid")]
+        public virtual void ShouldFailToAddItemsToCartWithInvalidCartid()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should fail to add items to cart with invalid cartid", null, ((string[])(null)));
+#line 40
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 7
+this.FeatureBackground();
 #line hidden
                 TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "itemId",
@@ -262,29 +321,27 @@ this.FeatureBackground();
                             "price",
                             "amount"});
                 table13.AddRow(new string[] {
-                            "2",
-                            "99",
-                            "24.95",
-                            "2470.05"});
-                table13.AddRow(new string[] {
-                            "3",
-                            "999",
-                            "22.5",
-                            "22477.5"});
-#line 38
- testRunner.And("CartInfo items in cart should be same to the table", ((string)(null)), table13, "And ");
+                            "1",
+                            "1",
+                            "550",
+                            "550"});
+#line 41
+testRunner.Given("CARTADDITEM add the items in table to cart with invalid cartid", ((string)(null)), table13, "Given ");
+#line hidden
+#line 44
+testRunner.Then("should get  response of \'InvalidCartError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Should fail to add items to cart with invalid credential")]
-        public virtual void ShouldFailToAddItemsToCartWithInvalidCredential()
+        [NUnit.Framework.DescriptionAttribute("Success to Delete Items from the cart")]
+        public virtual void SuccessToDeleteItemsFromTheCart()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should fail to add items to cart with invalid credential", null, ((string[])(null)));
-#line 45
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Success to Delete Items from the cart", null, ((string[])(null)));
+#line 47
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -317,44 +374,18 @@ this.FeatureBackground();
                             "1",
                             "550",
                             "550"});
-#line 46
-testRunner.Given("CARTADDITEM add the valid items table to cart with invalid credential", ((string)(null)), table14, "Given ");
-#line hidden
-#line 49
-testRunner.Then("should get  response of \'TokenError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Should fail to add items to cart with invalid itemid")]
-        public virtual void ShouldFailToAddItemsToCartWithInvalidItemid()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should fail to add items to cart with invalid itemid", null, ((string[])(null)));
-#line 51
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 7
-this.FeatureBackground();
+                table14.AddRow(new string[] {
+                            "2",
+                            "99",
+                            "24.95",
+                            "2470.05"});
+                table14.AddRow(new string[] {
+                            "3",
+                            "999",
+                            "22.5",
+                            "22477.5"});
+#line 48
+ testRunner.Given("add the valid items table to cart", ((string)(null)), table14, "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                             "itemId",
@@ -362,48 +393,15 @@ this.FeatureBackground();
                             "price",
                             "amount"});
                 table15.AddRow(new string[] {
-                            "999999",
+                            "1",
                             "1",
                             "550",
                             "550"});
-#line 52
-testRunner.Given("CARTADDITEM add the items in table to cart", ((string)(null)), table15, "Given ");
+#line 53
+ testRunner.When("CARTADDITEM delete the items in table from cart", ((string)(null)), table15, "When ");
 #line hidden
-#line 55
-testRunner.Then("should get  response of \'InvalidItemError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Should fail to add items to cart with invalid cartid")]
-        public virtual void ShouldFailToAddItemsToCartWithInvalidCartid()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should fail to add items to cart with invalid cartid", null, ((string[])(null)));
-#line 57
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 7
-this.FeatureBackground();
+#line 56
+ testRunner.Then("should get  response of \'OK\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                             "itemId",
@@ -411,15 +409,17 @@ this.FeatureBackground();
                             "price",
                             "amount"});
                 table16.AddRow(new string[] {
-                            "1",
-                            "1",
-                            "550",
-                            "550"});
-#line 58
-testRunner.Given("CARTADDITEM add the items in table to cart with invalid cartid", ((string)(null)), table16, "Given ");
-#line hidden
-#line 61
-testRunner.Then("should get  response of \'InvalidCartError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+                            "2",
+                            "99",
+                            "24.95",
+                            "2470.05"});
+                table16.AddRow(new string[] {
+                            "3",
+                            "999",
+                            "22.5",
+                            "22477.5"});
+#line 57
+ testRunner.And("CartInfo items in cart should be same to the table", ((string)(null)), table16, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -431,7 +431,7 @@ testRunner.Then("should get  response of \'InvalidCartError\'", ((string)(null))
         {
             string[] tagsOfScenario = ((string[])(null));
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should fail to delete items from cart with invalid credential", null, ((string[])(null)));
-#line 63
+#line 62
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -464,11 +464,24 @@ this.FeatureBackground();
                             "1",
                             "550",
                             "550"});
-#line 64
-testRunner.Given("CARTADDITEM delete the valid items table from cart with invalid credential", ((string)(null)), table17, "Given ");
+#line 63
+ testRunner.Given("add the valid items table to cart", ((string)(null)), table17, "Given ");
 #line hidden
-#line 67
-testRunner.Then("should get  response of \'TokenError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                            "itemId",
+                            "quantity",
+                            "price",
+                            "amount"});
+                table18.AddRow(new string[] {
+                            "1",
+                            "1",
+                            "550",
+                            "550"});
+#line 66
+ testRunner.Given("CARTADDITEM delete the valid items table from cart with invalid credential", ((string)(null)), table18, "Given ");
+#line hidden
+#line 69
+testRunner.Then("should get  response of \'CredentialError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -480,56 +493,7 @@ testRunner.Then("should get  response of \'TokenError\'", ((string)(null)), ((Te
         {
             string[] tagsOfScenario = ((string[])(null));
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should fail to delete items from empty cart", null, ((string[])(null)));
-#line 71
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 7
-this.FeatureBackground();
-#line hidden
-                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
-                            "itemId",
-                            "quantity",
-                            "price",
-                            "amount"});
-                table18.AddRow(new string[] {
-                            "2",
-                            "1",
-                            "550",
-                            "550"});
-#line 72
- testRunner.Given("CARTADDITEM delete the items in table from cart", ((string)(null)), table18, "Given ");
-#line hidden
-#line 75
-testRunner.Then("should get  response of \'InvalidItemError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Should fail to delete invalid items from cart")]
-        public virtual void ShouldFailToDeleteInvalidItemsFromCart()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should fail to delete invalid items from cart", null, ((string[])(null)));
-#line 77
+#line 73
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -558,12 +522,48 @@ this.FeatureBackground();
                             "price",
                             "amount"});
                 table19.AddRow(new string[] {
-                            "1",
+                            "2",
                             "1",
                             "550",
                             "550"});
-#line 78
- testRunner.Given("CARTADDITEM add the items in table to cart", ((string)(null)), table19, "Given ");
+#line 74
+ testRunner.Given("CARTADDITEM delete the unexisting items  from cart", ((string)(null)), table19, "Given ");
+#line hidden
+#line 77
+testRunner.Then("should get  response of \'InvalidItemError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should fail to delete invalid items from cart")]
+        public virtual void ShouldFailToDeleteInvalidItemsFromCart()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should fail to delete invalid items from cart", null, ((string[])(null)));
+#line 79
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 7
+this.FeatureBackground();
 #line hidden
                 TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                             "itemId",
@@ -571,14 +571,27 @@ this.FeatureBackground();
                             "price",
                             "amount"});
                 table20.AddRow(new string[] {
+                            "1",
+                            "1",
+                            "550",
+                            "550"});
+#line 80
+ testRunner.Given("add the valid items table to cart", ((string)(null)), table20, "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                            "itemId",
+                            "quantity",
+                            "price",
+                            "amount"});
+                table21.AddRow(new string[] {
                             "0",
                             "1",
                             "550",
                             "550"});
-#line 81
-testRunner.And("CARTADDITEM delete the items in table from cart", ((string)(null)), table20, "And ");
+#line 83
+testRunner.And("CARTADDITEM delete the invalid items in table from cart", ((string)(null)), table21, "And ");
 #line hidden
-#line 84
+#line 86
 testRunner.Then("should get  response of \'InvalidItemError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

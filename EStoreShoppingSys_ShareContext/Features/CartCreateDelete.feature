@@ -14,12 +14,11 @@ Scenario: success to create cart by valid token
 Scenario: fail to create cart by invalid token
 	Given register login and  get valid token
 	When CART create  with the  invalid token
-	Then should get  response of 'TokenError'
+	Then should get  response of 'CredentialError'
 
 Scenario: fail to create cart if user already has a cart
 	Given register login and  get valid token
-	And CART create with the  token
-	When CART create with the  token
+	When CART create with the  token twice
 	Then should get  response of 'DuplicateCartError'
 
 
@@ -35,4 +34,4 @@ Scenario: fail to delete cart by invalid token
 	Given register login and  get valid token
 	And CART create with the  token	
 	When CART delete  with the invalid token
-	Then should get  response of 'TokenError'
+	Then should get  response of 'CredentialError'

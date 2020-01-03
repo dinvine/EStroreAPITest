@@ -32,11 +32,17 @@ namespace EStoreShoppingSys.Steps
         public void WhenCARTCreateAtWithTheInvalidToken()
         {
             context["accessToken"] += "####";
-            _sharedSteps.GivenCreateCartAtCartCreateEndPoint();
+            _sharedSteps.GivenCreateCartAtCartCreateEndPoint("invalidToken");
             context["accessToken"] = context["accessToken"].ToString().Replace("####", "");
         }
 
 
+        [When(@"CART create with the  token twice")]
+        public void WhenCARTCreateWithTheTokenTwice()
+        {
+            _sharedSteps.GivenCreateCartAtCartCreateEndPoint("CartCreate");
+            _sharedSteps.GivenCreateCartAtCartCreateEndPoint("CartCreateTwice");
+        }
 
 
 
@@ -45,7 +51,7 @@ namespace EStoreShoppingSys.Steps
         {
 
             context["accessToken"] += "invalidToken";
-            _sharedSteps.GivenDeleteCart();
+            _sharedSteps.GivenDeleteCart("invalidToken");
             context["accessToken"] = context["accessToken"].ToString().Replace("invalidToken", "");
         }
 

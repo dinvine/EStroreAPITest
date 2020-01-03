@@ -30,7 +30,7 @@ namespace EStoreShoppingSys.Steps
         { 
             foreach(var row in addItemTable.Rows)
             {
-                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0]);
+                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0], "CartItemDelete");
             }
         }
 
@@ -46,12 +46,19 @@ namespace EStoreShoppingSys.Steps
             Assert.IsEmpty(cartInfoJson["datas"]["items"], "Test fail due to cart has items left after all the items deleted");
         }
 
+        [Given(@"CARTADDITEM add the invalid items table to cart")]
+        public void GivenAddTheItemsTableToCartAndExpectFail(Table table)
+        {
+            _sharedSteps.GivenAddTheValidItemsTableToCart(table,"invalidItem");
+        }
+
+
         [Given(@"CARTADDITEM add the valid items table to cart with invalid credential")]
         public void GivenCARTADDITEMAddTheValidItemsTableToCartWithInvalidCredential(Table table)
         {
             addItemTable = table;
             context["accessToken"] = "Invalid" + context["accessToken"];
-            _sharedSteps.GivenAddTheValidItemsTableToCart(table);
+            _sharedSteps.GivenAddTheValidItemsTableToCart(table, "invalidToken");
             context["accessToken"] =context["accessToken"].ToString().Replace("Invalid","");
         }
 
@@ -60,7 +67,7 @@ namespace EStoreShoppingSys.Steps
         {
             addItemTable = table;
             context["cartId"] = "Invalid" + context["cartId"];
-            _sharedSteps.GivenAddTheValidItemsTableToCart(table);
+            _sharedSteps.GivenAddTheValidItemsTableToCart(table,"invalidCartId");
             context["cartId"] = context["cartId"].ToString().Replace("Invalid", "");
         }
 
@@ -69,8 +76,30 @@ namespace EStoreShoppingSys.Steps
         public void GivenCARTADDITEMDeleteTheValidItemsTableFromCartWithInvalidCredential(Table table)
         { 
             context["accessToken"] = "Invalid" + context["accessToken"];
-            _sharedSteps.GivenAddTheValidItemsTableToCart(table);
+            foreach (var row in table.Rows)
+            {
+                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0].Trim(), "InvalidToken");
+            }
             context["accessToken"] = context["accessToken"].ToString().Replace("Invalid", "");
+        }
+
+        [Given(@"CARTADDITEM delete the unexisting items  from cart")]
+        public void GivenCARTADDITEMDeleteTheUnexistingItemsFromCart(Table table)
+        {
+            foreach (var row in table.Rows)
+            {
+                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0].Trim(), "unexistingItem");
+            }
+
+        }
+
+        [Given(@"CARTADDITEM delete the invalid items in table from cart")]
+        public void GivenCARTADDITEMDeleteTheInvalidItemsInTableFromCart(Table table)
+        {
+            foreach (var row in table.Rows)
+            {
+                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0].Trim(), "invalidItem");
+            }
         }
 
 
@@ -82,7 +111,7 @@ namespace EStoreShoppingSys.Steps
 
             foreach (var row in table.Rows)
             {
-                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0].Trim());
+                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0].Trim(),"CartItemDelete");
             }
 
         }

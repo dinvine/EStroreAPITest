@@ -105,3 +105,4 @@ D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys_ShareContext\bin\Debug\Utf8
 D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys_ShareContext\obj\Debug\EStoreShoppingSys.csproj.CopyComplete
 D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys_ShareContext\obj\Debug\EStoreShoppingSys.dll
 D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys_ShareContext\obj\Debug\EStoreShoppingSys.pdb
+D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys_ShareContext\obj\Debug\EStoreShoppingSys.csprojAssemblyReference.cache

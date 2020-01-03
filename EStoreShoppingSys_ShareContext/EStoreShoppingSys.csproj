@@ -125,9 +125,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\CartCreate.cs" />
+    <Compile Include="Model\CartDelete.cs" />
     <Compile Include="Model\CartItemAdd.cs" />
     <Compile Include="Model\CartItemDelete.cs" />
+    <Compile Include="Model\ProductInfo.cs" />
     <Compile Include="Model\ResponseError.cs" />
+    <Compile Include="Model\TransactionNumber.cs" />
+    <Compile Include="Model\UserAccountDelete.cs" />
     <Compile Include="src\TempStudyWork.cs" />
     <Compile Include="Steps\ProductInfoViewSteps.cs" />
     <Compile Include="Steps\CartInfoViewSteps.cs" />

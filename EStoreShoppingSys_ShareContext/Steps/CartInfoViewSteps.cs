@@ -32,6 +32,12 @@ namespace EStoreShoppingSys.Steps
         [Then(@"Cartinfo get products included")]
         public void GetCartInfo()
         {
+            GetCartInfo("CartInfo");
+
+        }
+
+        public void GetCartInfo(string expectCode="CartInfo")
+        {
             string baseUrlEStoreBaseURL = "EStoreBaseURL";
             string endPointURL = "CartInfoEndPoint";
             RequestParams requestParams = new RequestParams();
@@ -42,7 +48,11 @@ namespace EStoreShoppingSys.Steps
             //requestParams.Parameters.Add(-------------);
             //QueryParameters
             requestParams.QueryParameters.Add("account_number", context["accountNumber"].ToString());
-            _sharedSteps.RequestInURLEncodedForm(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams);
+            if (expectCode == "CartInfo")
+                _sharedSteps.RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams, "CartInfo");
+            else
+                _sharedSteps.RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams, "ResponseError");
+
 
             context["settings"] = _settings;
 
@@ -53,7 +63,7 @@ namespace EStoreShoppingSys.Steps
         {
 
             context["accessToken"] = "Invalid" + context["accessToken"];
-            GetCartInfo();
+            GetCartInfo("invalidToken");
             context["accessToken"] = context["accessToken"].ToString().Replace("Invalid", "");
 
         }
@@ -81,6 +91,7 @@ namespace EStoreShoppingSys.Steps
         public void ThenCARTADDITEMItemsInCartShouldSameToTheTable(Table table)
         {
 
+            GetCartInfo("CartView");
             Double amountDue = 0;
             GetCartInfo();
             JObject cartInfoJson = JObject.Parse(_settings.MyRestResponse.Content);

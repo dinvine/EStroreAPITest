@@ -26,7 +26,7 @@ namespace EStoreShoppingSys.Steps
         public void WhenTransactionNumberVisitTheCartInfoAPIWithInvalidCredential()
         {
             context["accessToken"] = "Invalid" + context["accessToken"];
-            _sharedSteps.GetTransactionNumber();
+            _sharedSteps.GetTransactionNumber("invalidToken");
             context["accessToken"] = context["accessToken"].ToString().Replace("Invalid", "");
         }
         

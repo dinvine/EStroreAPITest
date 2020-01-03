@@ -39,7 +39,7 @@ namespace EStoreShoppingSys.Steps
         public void WhenTransactionSaveAddTheItemsInTableToTransaction(Table table)
         {
             addItemTable = table;
-            _sharedSteps.GivenSaveTheItemsTableToTransaction(table);
+            _sharedSteps.GivenSaveTheItemsTableToTransaction(table,"TransactionSave");
         }
         
         [When(@"TransactionSave add the items in table to transaction with invalid credential")]
@@ -47,7 +47,7 @@ namespace EStoreShoppingSys.Steps
         {
             
             context["accessToken"] = "Invalid" + context["accessToken"];
-            _sharedSteps.GivenSaveTheItemsTableToTransaction(table);
+            _sharedSteps.GivenSaveTheItemsTableToTransaction(table,"invalidToken");
             context["accessToken"] = context["accessToken"].ToString().Replace("Invalid", "");
         }
         
@@ -55,16 +55,16 @@ namespace EStoreShoppingSys.Steps
         public void WhenTransactionSaveAddTheItemsInTableToTransactionWithInvalidAccountNumber(Table table)
         {
             context["accountNumber"] = "Invalid" + context["accountNumber"];
-            _sharedSteps.GivenSaveTheItemsTableToTransaction(table);
+            _sharedSteps.GivenSaveTheItemsTableToTransaction(table,"invalidAccountNumber");
             context["accountNumber"] = context["accountNumber"].ToString().Replace("Invalid", "");
         }
         
         [When(@"TransactionSave add the items in table to transaction with invalid transactionNumber")]
         public void WhenTransactionSaveAddTheItemsInTableToTransactionWithInvalidTransactionNumber(Table table)
         {
-            context["transactionNumber"] = "Invalid" + context["transactionNumber"];
-            _sharedSteps.GivenSaveTheItemsTableToTransaction(table);
-            context["transactionNumber"] = context["transactionNumber"].ToString().Replace("Invalid", "");
+            context["transactionNumber"] = context["transactionNumber"]+"9791";
+            _sharedSteps.GivenSaveTheItemsTableToTransaction(table,"invalidTransactionNum");
+            context["transactionNumber"] = context["transactionNumber"].ToString().Replace("9791", "");
         }
         
         

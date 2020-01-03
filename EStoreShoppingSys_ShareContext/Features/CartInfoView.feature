@@ -11,7 +11,7 @@ Scenario: success  to view cart info with valid credential
 Scenario: fail  to view cart info with invalid credential
 	Given Register And Login And Create Cart
 	When CartInfo visit the cart info API with invalid credential
-	Then should get  response of 'TokenError'
+	Then should get  response of 'CredentialError'
 
 
 	
