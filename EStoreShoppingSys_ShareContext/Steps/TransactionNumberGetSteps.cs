@@ -26,7 +26,7 @@ namespace EStoreShoppingSys.Steps
         public void WhenTransactionNumberVisitTheCartInfoAPIWithInvalidCredential()
         {
             context["accessToken"] = "Invalid" + context["accessToken"];
-            _sharedSteps.GetTransactionNumber("invalidToken");
+            _sharedSteps.GetTransactionNumber();
             context["accessToken"] = context["accessToken"].ToString().Replace("Invalid", "");
         }
         
@@ -34,7 +34,7 @@ namespace EStoreShoppingSys.Steps
         [Then(@"TransactionNumber should give json with '(.*)' containing items '(.*)'")]
         public void ThenTransactionNumberShouldGiveJsonWithContainingItems(string datas, string items)
         {
-            _sharedSteps.ThenGetResponseBodyWithIncluding(datas, items);
+            _sharedSteps.ThenAddItemInResponseBodyToScenarioContext(datas, items);
             if (context.ContainsKey("transactionNumber~Existing"))
                 {
                 context["transactionNumber"] = context["transactionNumber~Existing"];

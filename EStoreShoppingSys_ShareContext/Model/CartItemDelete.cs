@@ -12,7 +12,6 @@ namespace EStoreShoppingSys.Model
     {
         public int cartId { get; set; }
         public string accountNumber { get; set; }
-        public int amountDue { get; set; }
     }
 
     public class CartItemDelete

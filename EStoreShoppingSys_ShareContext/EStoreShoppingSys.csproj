@@ -57,6 +57,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json.Schema, Version=3.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.Schema.3.0.11\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
@@ -129,7 +132,7 @@
     <Compile Include="Model\CartDelete.cs" />
     <Compile Include="Model\CartItemAdd.cs" />
     <Compile Include="Model\CartItemDelete.cs" />
-    <Compile Include="Model\ProductInfo.cs" />
+    <Compile Include="Model\ProductList.cs" />
     <Compile Include="Model\ResponseError.cs" />
     <Compile Include="Model\TransactionNumber.cs" />
     <Compile Include="Model\UserAccountDelete.cs" />
@@ -138,9 +141,9 @@
     <Compile Include="Steps\CartInfoViewSteps.cs" />
     <Compile Include="Steps\CartItemEditSteps.cs" />
     <Compile Include="Model\CartInfo.cs" />
-    <Compile Include="Model\FunctionsShared.cs" />
-    <Compile Include="Model\Settings.cs" />
-    <Compile Include="Model\TransactionInfo.cs" />
+    <Compile Include="Common\CommonFunctions.cs" />
+    <Compile Include="Common\RestClientSettings.cs" />
+    <Compile Include="Model\TransactionSave.cs" />
     <Compile Include="Model\UserAccount.cs" />
     <Compile Include="Model\UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -160,7 +163,7 @@
     <None Include="Features\CartCreateDelete.feature" />
     <None Include="Features\CartInfoView.feature" />
     <None Include="Features\CartItemEdit.feature" />
-    <None Include="Features\ProductInfoView.feature" />
+    <None Include="Features\ProductListView.feature" />
     <None Include="Features\SpecFlowTryOutStudy.feature" />
     <None Include="Features\TransactionNumberGet.feature" />
     <None Include="Features\TransactionSave.feature" />

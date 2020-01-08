@@ -8,7 +8,8 @@ Scenario: success to obtain token by valid credential
 	Given register with 'random' username and 'random' password
 	When get token with 'valid' credential
 	Then should get  response of 'OK'
-	And should get response body with ['datas'] including 'accessToken,tokenType,expiresIn,accountNumber'
+	And should get response comform with model 'UserLogin'
+	And add  item:  ['datas'] ['accessToken,tokenType,expiresIn'] in response body to scenario context
 	And should keep value constant for keys 'accountNumber'
 
 Scenario: fail to obtain token by invalid credential

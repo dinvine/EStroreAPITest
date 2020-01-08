@@ -38,7 +38,7 @@ namespace EStoreShoppingSys.Steps
         public void WhenAccountDeleteDeleteTheAccountNumberWithInvalidToken()
         {
             context["accessToken"] = "Invalid" + context["accessToken"];
-            _sharedSteps.GivenDeleteAccount("invalidToken");
+            _sharedSteps.GivenDeleteAccount();
             context["accessToken"] = context["accessToken"].ToString().Replace("Invalid", "");
         }
         
@@ -46,7 +46,7 @@ namespace EStoreShoppingSys.Steps
         public void WhenAccountDeleteDeleteTheAccountNumberWithInvalidAccount_Number()
         {
             context["accountNumber"] = "Invalid" + context["accountNumber"];
-            _sharedSteps.GivenDeleteAccount("invalidAccountNum");
+            _sharedSteps.GivenDeleteAccount();
             context["accountNumber"] = context["accountNumber"].ToString().Replace("Invalid", "");
 
         }
@@ -55,7 +55,7 @@ namespace EStoreShoppingSys.Steps
         [Then(@"AccountDelete should give json with '(.*)' containing items '(.*)'")]
         public void ThenAccountDeleteShouldGiveJsonWithContainingItems(string datas, string items)
         {
-            _sharedSteps.ThenGetResponseBodyWithIncluding(datas, items);
+            _sharedSteps.ThenAddItemInResponseBodyToScenarioContext(datas, items);
             Assert.AreEqual(context["accountNumber"], context["accountNumber~Existing"], "Test fail due to accountNumber in response body is not equal to the original one");
         }
     }

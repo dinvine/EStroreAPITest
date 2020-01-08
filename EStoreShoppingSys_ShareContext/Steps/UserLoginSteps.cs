@@ -32,7 +32,7 @@ namespace EStoreShoppingSys.Steps
         public void GivenGetTheExistingUsernameAndPassword(string endpoint)
         {
             _sharedSteps.GivenGenerateTheUsernameAndPasswordAt( "random", "random");
-            _sharedSteps.WhenVisitTheRegisterAPIWithTheUsernameAndPassword("0");
+            _sharedSteps.WhenVisitTheRegisterAPIWithTheUsernameAndPassword();
         }
 
 
@@ -47,7 +47,7 @@ namespace EStoreShoppingSys.Steps
         [Then(@"TokenAPI should give json with '(.*)' containing items '(.*)'")]
         public void ThenTokenAPIShouldGiveJsonWithP0ContainingItems(string datas, string items)
         {
-            _sharedSteps.ThenGetResponseBodyWithIncluding(datas, items);
+            _sharedSteps.ThenAddItemInResponseBodyToScenarioContext(datas, items);
         }
 
         [Given(@"register login and  get valid token")]
@@ -55,7 +55,7 @@ namespace EStoreShoppingSys.Steps
         public void GivenRegisterOnWithUsernameAndPassword()
         {
             _sharedSteps.GivenGenerateTheUsernameAndPasswordAt("random", "random");
-            _sharedSteps.WhenVisitTheRegisterAPIWithTheUsernameAndPassword("UserAccount");
+            _sharedSteps.WhenVisitTheRegisterAPIWithTheUsernameAndPassword();
             _sharedSteps.GivenGetTokenAtEndpoint("valid");
         }
 

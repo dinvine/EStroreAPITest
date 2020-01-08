@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace EStoreShoppingSys.Model
 {
+
+
+
+
     public class CartInfo
     {
         public int code { get; set; }
@@ -17,18 +21,17 @@ namespace EStoreShoppingSys.Model
     {
         public int cartId { get; set; }
 
-        public int accountNumber { get; set; }
-        public int amountDue { get; set; }
-
-        public items itemDatas { get; set; }
+        public string accountNumber { get; set; }
+        public double amountDue { get; set; }
+        public List<Item> items { get; set; }
     }
 
-    public class items
+    public class Item
     {
-        public int itemId { get; set; }
+        public string itemId { get; set; }
         public string itemName { get; set; }
-
         public int quantity { get; set; }
-        public int price { get; set; }
+        public string price { get; set; }
     }
+
 }

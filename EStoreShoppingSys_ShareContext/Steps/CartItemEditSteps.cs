@@ -30,7 +30,7 @@ namespace EStoreShoppingSys.Steps
         { 
             foreach(var row in addItemTable.Rows)
             {
-                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0], "CartItemDelete");
+                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0]);
             }
         }
 
@@ -49,7 +49,7 @@ namespace EStoreShoppingSys.Steps
         [Given(@"CARTADDITEM add the invalid items table to cart")]
         public void GivenAddTheItemsTableToCartAndExpectFail(Table table)
         {
-            _sharedSteps.GivenAddTheValidItemsTableToCart(table,"invalidItem");
+            _sharedSteps.GivenAddTheValidItemsTableToCart(table);
         }
 
 
@@ -58,7 +58,7 @@ namespace EStoreShoppingSys.Steps
         {
             addItemTable = table;
             context["accessToken"] = "Invalid" + context["accessToken"];
-            _sharedSteps.GivenAddTheValidItemsTableToCart(table, "invalidToken");
+            _sharedSteps.GivenAddTheValidItemsTableToCart(table);
             context["accessToken"] =context["accessToken"].ToString().Replace("Invalid","");
         }
 
@@ -67,7 +67,7 @@ namespace EStoreShoppingSys.Steps
         {
             addItemTable = table;
             context["cartId"] = "Invalid" + context["cartId"];
-            _sharedSteps.GivenAddTheValidItemsTableToCart(table,"invalidCartId");
+            _sharedSteps.GivenAddTheValidItemsTableToCart(table);
             context["cartId"] = context["cartId"].ToString().Replace("Invalid", "");
         }
 
@@ -78,7 +78,7 @@ namespace EStoreShoppingSys.Steps
             context["accessToken"] = "Invalid" + context["accessToken"];
             foreach (var row in table.Rows)
             {
-                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0].Trim(), "InvalidToken");
+                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0].Trim());
             }
             context["accessToken"] = context["accessToken"].ToString().Replace("Invalid", "");
         }
@@ -88,7 +88,7 @@ namespace EStoreShoppingSys.Steps
         {
             foreach (var row in table.Rows)
             {
-                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0].Trim(), "unexistingItem");
+                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0].Trim());
             }
 
         }
@@ -98,7 +98,7 @@ namespace EStoreShoppingSys.Steps
         {
             foreach (var row in table.Rows)
             {
-                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0].Trim(), "invalidItem");
+                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0].Trim());
             }
         }
 
@@ -111,7 +111,7 @@ namespace EStoreShoppingSys.Steps
 
             foreach (var row in table.Rows)
             {
-                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0].Trim(),"CartItemDelete");
+                _sharedSteps.GivenDeleteOneRecordOfItemFromCart(row[0].Trim());
             }
 
         }

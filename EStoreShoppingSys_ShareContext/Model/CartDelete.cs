@@ -15,9 +15,9 @@ namespace EStoreShoppingSys.Model
 
     public class Datas_CartDelete
     {
-        public int cartId { get; set; }
+        public string cartId { get; set; }
 
-        public int accountNumber { get; set; }
+        public string accountNumber { get; set; }
 
     }
 }

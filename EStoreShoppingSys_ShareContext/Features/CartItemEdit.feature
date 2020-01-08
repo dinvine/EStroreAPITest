@@ -16,6 +16,9 @@ Scenario: Success to Add Items into the cart
 | 4      | 9999     | 14.99 | 149885.01 |
 | 5      | 99999    | 27.9  | 2789972.1 |
 	Then should get  response of 'OK'
+	And should get response comform with model 'CartItemAdd'
+	And add  item:  ['datas'] ['cartId,accountNumber'] in response body to scenario context
+	And should keep value constant for keys 'cartId,accountNumber'
 	And CartInfo items in cart should be same to the table
 | itemId | quantity | price | amount    |
 | 1      | 1        | 550   | 550       |
@@ -54,6 +57,9 @@ Scenario: Success to Delete Items from the cart
 | itemId | quantity | price | amount    |
 | 1      | 1        | 550   | 550       |
 	Then should get  response of 'OK'
+	And should get response comform with model 'CartItemDelete'
+	And add  item:  ['datas'] ['cartId,accountNumber'] in response body to scenario context
+	And should keep value constant for keys 'cartId,accountNumber'
 	And CartInfo items in cart should be same to the table
 | itemId | quantity | price | amount    |
 | 2      | 99       | 24.95 | 2470.05   |

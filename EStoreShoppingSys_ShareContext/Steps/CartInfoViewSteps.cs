@@ -30,13 +30,8 @@ namespace EStoreShoppingSys.Steps
 
         [When(@"Cartinfo get products included")]
         [Then(@"Cartinfo get products included")]
+
         public void GetCartInfo()
-        {
-            GetCartInfo("CartInfo");
-
-        }
-
-        public void GetCartInfo(string expectCode="CartInfo")
         {
             string baseUrlEStoreBaseURL = "EStoreBaseURL";
             string endPointURL = "CartInfoEndPoint";
@@ -48,12 +43,11 @@ namespace EStoreShoppingSys.Steps
             //requestParams.Parameters.Add(-------------);
             //QueryParameters
             requestParams.QueryParameters.Add("account_number", context["accountNumber"].ToString());
-            if (expectCode == "CartInfo")
-                _sharedSteps.RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams, "CartInfo");
-            else
-                _sharedSteps.RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams, "ResponseError");
 
-
+                 _sharedSteps.RequestInURLEncodedFromAndValidateTheResponse(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams);
+                //_sharedSteps.RequestInURLEncodedFromAndValidateTheResponse2<CartInfo>(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams);
+               // _sharedSteps.RequestInURLEncodedFromAndValidateTheResponse2<ResponseError>(baseUrlEStoreBaseURL, Method.GET, endPointURL, requestParams);
+            
             context["settings"] = _settings;
 
         }
@@ -63,7 +57,7 @@ namespace EStoreShoppingSys.Steps
         {
 
             context["accessToken"] = "Invalid" + context["accessToken"];
-            GetCartInfo("invalidToken");
+            GetCartInfo();
             context["accessToken"] = context["accessToken"].ToString().Replace("Invalid", "");
 
         }
@@ -91,7 +85,6 @@ namespace EStoreShoppingSys.Steps
         public void ThenCARTADDITEMItemsInCartShouldSameToTheTable(Table table)
         {
 
-            GetCartInfo("CartView");
             Double amountDue = 0;
             GetCartInfo();
             JObject cartInfoJson = JObject.Parse(_settings.MyRestResponse.Content);

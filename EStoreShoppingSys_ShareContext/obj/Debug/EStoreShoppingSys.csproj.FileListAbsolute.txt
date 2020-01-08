@@ -106,3 +106,5 @@ D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys_ShareContext\obj\Debug\ESto
 D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys_ShareContext\obj\Debug\EStoreShoppingSys.dll
 D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys_ShareContext\obj\Debug\EStoreShoppingSys.pdb
 D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys_ShareContext\obj\Debug\EStoreShoppingSys.csprojAssemblyReference.cache
+D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys_ShareContext\bin\Debug\Newtonsoft.Json.Schema.dll
+D:\workroom\CodeHouse\VisualStudio\EStoreShoppingSys_ShareContext\bin\Debug\Newtonsoft.Json.Schema.xml

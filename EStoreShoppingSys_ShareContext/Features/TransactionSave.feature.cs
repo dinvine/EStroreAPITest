@@ -117,41 +117,44 @@ this.FeatureBackground();
 #line 11
  testRunner.Given("get transaction number", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                             "itemId",
                             "itemName",
                             "quantity",
                             "price",
                             "amount"});
-                table22.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "1",
                             "Apple Watch Series 4",
                             "1",
                             "550",
                             "550"});
-                table22.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "2",
                             "ELEGANT Earrings",
                             "99",
                             "24.95",
                             "2470.05"});
-                table22.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "3",
                             "USB Wireless Receiver",
                             "999",
                             "22.5",
                             "22477.5"});
-                table22.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "4",
                             "GREEN TEA CLEANSER",
                             "9999",
                             "14.99",
                             "149885.01"});
 #line 12
- testRunner.When("TransactionSave add the items in table to transaction", ((string)(null)), table22, "When ");
+ testRunner.When("TransactionSave add the items in table to transaction", ((string)(null)), table14, "When ");
 #line hidden
 #line 18
  testRunner.Then("should get  response of \'OK\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 19
+  testRunner.And("should get response comform with model \'TransactionSave\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -163,7 +166,7 @@ this.FeatureBackground();
         {
             string[] tagsOfScenario = ((string[])(null));
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should Fail to save items into transaction with invalid credential", null, ((string[])(null)));
-#line 24
+#line 27
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -186,25 +189,25 @@ this.FeatureBackground();
 #line 7
 this.FeatureBackground();
 #line hidden
-#line 25
+#line 28
  testRunner.Given("get transaction number", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                             "itemId",
                             "itemName",
                             "quantity",
                             "price",
                             "amount"});
-                table23.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "1",
                             "Apple Watch Series 4",
                             "1",
                             "550",
                             "550"});
-#line 26
- testRunner.When("TransactionSave add the items in table to transaction with invalid credential", ((string)(null)), table23, "When ");
-#line hidden
 #line 29
+ testRunner.When("TransactionSave add the items in table to transaction with invalid credential", ((string)(null)), table15, "When ");
+#line hidden
+#line 32
  testRunner.Then("should get  response of \'CredentialError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -217,7 +220,7 @@ this.FeatureBackground();
         {
             string[] tagsOfScenario = ((string[])(null));
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should Fail to save items into transaction with invalid itemid", null, ((string[])(null)));
-#line 33
+#line 36
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -240,25 +243,25 @@ this.ScenarioInitialize(scenarioInfo);
 #line 7
 this.FeatureBackground();
 #line hidden
-#line 34
+#line 37
  testRunner.Given("TransactionSave get transaction number", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                             "itemId",
                             "itemName",
                             "quantity",
                             "price",
                             "amount"});
-                table24.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "0",
                             "Apple Watch Series 4",
                             "1",
                             "550",
                             "550"});
-#line 35
- testRunner.When("TransactionSave add the items in table to transaction", ((string)(null)), table24, "When ");
+#line 38
+ testRunner.When("TransactionSave add the items in table to transaction", ((string)(null)), table16, "When ");
 #line hidden
-#line 39
+#line 42
  testRunner.Then("should get  response of \'InvalidItemError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -271,7 +274,7 @@ this.FeatureBackground();
         {
             string[] tagsOfScenario = ((string[])(null));
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should Fail to save items into transaction with invalid accountNumber", null, ((string[])(null)));
-#line 42
+#line 45
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -294,25 +297,25 @@ this.ScenarioInitialize(scenarioInfo);
 #line 7
 this.FeatureBackground();
 #line hidden
-#line 43
+#line 46
  testRunner.Given("TransactionSave get transaction number", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                             "itemId",
                             "itemName",
                             "quantity",
                             "price",
                             "amount"});
-                table25.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "1",
                             "Apple Watch Series 4",
                             "1",
                             "550",
                             "550"});
-#line 44
- testRunner.When("TransactionSave add the items in table to transaction with invalid accountNumber", ((string)(null)), table25, "When ");
+#line 47
+ testRunner.When("TransactionSave add the items in table to transaction with invalid accountNumber", ((string)(null)), table17, "When ");
 #line hidden
-#line 48
+#line 51
  testRunner.Then("should get  response of \'AccountNumberError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -325,7 +328,7 @@ this.FeatureBackground();
         {
             string[] tagsOfScenario = ((string[])(null));
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should Fail to save items into transaction with invalid transactionNumber", null, ((string[])(null)));
-#line 50
+#line 53
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -348,26 +351,26 @@ this.ScenarioInitialize(scenarioInfo);
 #line 7
 this.FeatureBackground();
 #line hidden
-#line 51
+#line 54
  testRunner.Given("TransactionSave get transaction number", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                             "itemId",
                             "itemName",
                             "quantity",
                             "price",
                             "amount"});
-                table26.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "1",
                             "Apple Watch Series 4",
                             "1",
                             "550",
                             "550"});
-#line 52
- testRunner.When("TransactionSave add the items in table to transaction with invalid transactionNum" +
-                        "ber", ((string)(null)), table26, "When ");
-#line hidden
 #line 55
+ testRunner.When("TransactionSave add the items in table to transaction with invalid transactionNum" +
+                        "ber", ((string)(null)), table18, "When ");
+#line hidden
+#line 58
  testRunner.Then("should get  response of \'InvalidTransactionNumberError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

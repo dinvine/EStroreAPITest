@@ -7,6 +7,9 @@ Scenario: success  to view cart info with valid credential
 	Given Register And Login And Create Cart
 	When Cartinfo get products included
 	Then should get  response of 'OK'
+	And should get response comform with model 'CartInfo'
+	And add  item:  ['datas'] ['cartId,accountNumber,amountDue'] in response body to scenario context
+	And should keep value constant for keys 'cartId,accountNumber'
 
 Scenario: fail  to view cart info with invalid credential
 	Given Register And Login And Create Cart

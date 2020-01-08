@@ -7,7 +7,8 @@
 Scenario: successful register with valid username and password
 	When register with 'random' username and 'random' password
 	Then should get  response of 'OK'
-	And should get response body with ['datas'] including 'accountNumber'
+	And should get response comform with model 'UserAccount'
+	And add  item:  ['datas'] ['accountNumber'] in response body to scenario context
 
 Scenario: fail to register with existing username
 	When register with 'existing' username and 'random' password

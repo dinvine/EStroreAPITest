@@ -9,7 +9,7 @@ namespace EStoreShoppingSys.Model
 
     public class Datas_UserAccount
     {
-        public string accountNumber111 { get; set; }
+        public string accountNumber { get; set; }
     }
 
     public class UserAccount

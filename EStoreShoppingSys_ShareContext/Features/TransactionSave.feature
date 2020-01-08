@@ -16,6 +16,9 @@ Scenario: Success to save items into transaction
 | 3      | USB Wireless Receiver | 999		| 22.5  | 22477.5	|
 | 4      | GREEN TEA CLEANSER    | 9999		| 14.99 | 149885.01	|
 	Then should get  response of 'OK'
+		And should get response comform with model 'TransactionSave'
+	#And add  item:  ['datas'] ['TransactionNumber'] in response body to scenario context
+	#And should keep value constant for keys 'TransactionNumber'
 	# assume the response contains datas:{items:[{item1,quantity},{item2,quantity},{....}]}
     # but the real API return the datas =null , so the code below can not be tested.
 	# And TransactionSave  items  should be same to the table
