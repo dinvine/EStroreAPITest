@@ -14,12 +14,7 @@ namespace EStoreShoppingSys.Model
         public IRestResponse MyRestResponse { get; set; }
 
     }
-    /*
-    public static class StaticSettings{
-        public static Settings settingStatic;
-        public static ScenarioContext contextStaic;
-    }
-    */
+
     public class RequestParams
     {
         public Dictionary<string, string> Headers;

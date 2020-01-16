@@ -20,8 +20,8 @@ namespace EStoreShoppingSys.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("SpecFlowTryOutStudy")]
-    public partial class SpecFlowTryOutStudyFeature
+    [NUnit.Framework.DescriptionAttribute("SpecFlowStudy")]
+    public partial class SpecFlowStudyFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -35,8 +35,8 @@ namespace EStoreShoppingSys.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SpecFlowTryOutStudy", "\tIn order to find the answer \r\n\tAs a tester idiot\r\n\tI want to roll on my ways to " +
-                    "solutions from here", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SpecFlowStudy", "\tIn order to make transaction order\r\n\tAs a user\r\n\tI want to get the transaction n" +
+                    "umber", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -75,15 +75,15 @@ namespace EStoreShoppingSys.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("try the ExecuteAsync  in Example CartViewInfo")]
+        [NUnit.Framework.DescriptionAttribute("C501 Should fail to delete items from empty cart")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void TryTheExecuteAsyncInExampleCartViewInfo()
+        public virtual void C501ShouldFailToDeleteItemsFromEmptyCart()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("try the ExecuteAsync  in Example CartViewInfo", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C501 Should fail to delete items from empty cart", null, new string[] {
                         "mytag"});
-#line 7
+#line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -103,14 +103,21 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 8
- testRunner.Given("CartInfo Register And Login And CreateCart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 9
- testRunner.When("visit the cart info API with valid credential", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                            "itemId",
+                            "quantity",
+                            "price",
+                            "amount"});
+                table14.AddRow(new string[] {
+                            "2",
+                            "1",
+                            "550",
+                            "550"});
+#line 7
+ testRunner.Given("CARTADDITEM delete the unexisting items  from cart", ((string)(null)), table14, "Given ");
 #line hidden
 #line 10
- testRunner.Then("CartInfo should give  response of \'OK\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("should get  response of \'InvalidItemError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

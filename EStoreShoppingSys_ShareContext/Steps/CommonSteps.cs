@@ -16,11 +16,8 @@ namespace EStoreShoppingSys.Steps
     [Binding]
     public  class CommonSteps
     {
-        // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
-
         readonly  ScenarioContext context;
         private  Settings _settings ;
-       // readonly FunctionsShared  funcs ;
         public CommonSteps(ScenarioContext injectedContext, Settings p_settings)
         {
             context = injectedContext;
@@ -28,53 +25,13 @@ namespace EStoreShoppingSys.Steps
             context["browserId"] = "honor";
         }
 
-        /*
-        [Given(@"Request with header and body in URLEncodedForm")]
-        public void RequestInURLEncodedForm(string baseUrlEStoreBaseURL, Method method, string endPointURL, RequestParams requestParams)
-        {
-            if(context.ContainsKey("RestSettings"))
-                _settings = (Settings)context["RestSettings"];
-            _settings.MyRestClient = new RestClient(ConfigurationManager.AppSettings[baseUrlEStoreBaseURL]);
-            if (context.ContainsKey("accessToken"))
-            {
-                var authenticator = new JwtAuthenticator(context["accessToken"].ToString());
-                _settings.MyRestClient.Authenticator = authenticator;
-            }
-
-            if (context.ContainsKey("cookie_token_1") && context.ContainsKey("cookie_token_2"))
-            {
-                CookieContainer cookiecon = new CookieContainer();
-                string[] items = context["cookie_token_1"].ToString().Split('#');
-                cookiecon.Add(new Cookie(items[0], items[1], items[2], items[3]));
-                items = context["cookie_token_2"].ToString().Split('#');
-                cookiecon.Add(new Cookie(items[0], items[1], items[2], items[3]));
-                _settings.MyRestClient.CookieContainer = cookiecon;
-            }
-
-            //create cookiecon to save cookies in previous response
-            _settings.MyRestRequest = new RestRequest(ConfigurationManager.AppSettings[endPointURL], method);
-            foreach (KeyValuePair<string, string> kvPairs in requestParams.Headers)
-            {
-                _settings.MyRestRequest.AddHeader(kvPairs.Key, kvPairs.Value);
-            }
-
-            foreach (KeyValuePair<string, string> kvPairs in requestParams.Parameters)
-            {
-                _settings.MyRestRequest.AddParameter(kvPairs.Key, kvPairs.Value);
-            }
-
-            foreach (KeyValuePair<string, string> kvPairs in requestParams.QueryParameters)
-            {
-                _settings.MyRestRequest.AddQueryParameter(kvPairs.Key, kvPairs.Value);
-            }
-            //execute request
-            _settings.MyRestResponse = _settings.MyRestClient.Execute(_settings.MyRestRequest);
-
-    //        if (ThenGetResponseBodyWithEqualTo("code","200"))
-                context["RestSettings"]= _settings;
-        }*/
-
-
+        /// <summary>
+        /// asyc execute request and validate the response json string with schema model
+        /// </summary>
+        /// <param name="baseUrlEStoreBaseURL">URI</param>
+        /// <param name="method">Get Post Delete</param>
+        /// <param name="endPointURL"> EndPoint </param>
+        /// <param name="requestParams">params for request</param>
         [Given(@"Request  in URLEncodedForm and validate the response")]
         public void RequestInURLEncodedFromAndValidateTheResponse(string baseUrlEStoreBaseURL, Method method, string endPointURL, RequestParams requestParams)
         {
@@ -124,9 +81,8 @@ namespace EStoreShoppingSys.Steps
         public void ThenShouldGetResponseStatusOf(string p0)
         {
             Dictionary<string, string> headerList = FunctionsShared.GetResponseHeaderDict(_settings.MyRestResponse);
-            Console.WriteLine(p0);
+            //Console.WriteLine(p0);
             Assert.AreEqual("application/json; charset", headerList["Content-Type"], "Test fail due to the Conten-Type in header is not application json");
-
             Assert.AreEqual(p0, _settings.MyRestResponse.StatusCode.ToString(), "Test fail due to Response StatusCode is not equal to OK");
         }
 
@@ -147,7 +103,7 @@ namespace EStoreShoppingSys.Steps
 
 
         [Then(@"get response body with ['(.*)']['(.*)']   equal to '(.*)'")]
-        //get response body with [datas][account_number]   equal to '1234567'
+        //get response body with e.g. [datas][account_number]   equal to '1234567'
         public void ThenGetResponseJsonWith2LevelItemEqualTo(string datas, string item, string expectedValue)
         {
             var jObject = JObject.Parse(_settings.MyRestResponse.Content);
@@ -156,6 +112,7 @@ namespace EStoreShoppingSys.Steps
         }
 
         [Then(@"add  item:  \['(.*)'] \['(.*)'] in response body to scenario context")]
+        //add  item in response body e.g. [datas][account_number]   equal to '1234567'
         public void ThenAddItemInResponseBodyToScenarioContext(string datas, string items)
         {
             var jObject = JObject.Parse(_settings.MyRestResponse.Content);
@@ -172,7 +129,10 @@ namespace EStoreShoppingSys.Steps
             }
         }
 
-
+        /// <summary>
+        /// should get response comform with model named ResponseSchema
+        /// </summary>
+        /// <param name="ResponseSchema"> the name of model Schema</param>
         [Then(@"should get response comform with model '(.*)'")]
         public void ThenShouldGetResponseComformWithModel(string ResponseSchema)
         {
@@ -217,6 +177,11 @@ namespace EStoreShoppingSys.Steps
             }
         }
 
+        /// <summary>
+        /// verify whether the string p0 contains p1
+        /// </summary>
+        /// <param name="p0"></param>
+        /// <param name="p1"></param>
         [Then(@"with item named '(.*)'  containing substring '(.*)'")]
         public void ThenWithItemNamedContainingSubstring(string p0, string p1)
         {
@@ -227,7 +192,10 @@ namespace EStoreShoppingSys.Steps
 
         }
 
-
+        /// <summary>
+        /// verify  the value of string p0 keeps constant by compare the value of context[p0] and context[p0+ "~Existing"]
+        /// </summary>
+        /// <param name="p0"></param>
         [Then(@"should keep value constant for keys '(.*)'")]
         public void ThenShouldKeepValueConstantForKeys(string p0)
         {
@@ -240,7 +208,10 @@ namespace EStoreShoppingSys.Steps
         }
 
 
-
+        /// <summary>
+        /// verify the response status , code , and message in response body
+        /// </summary>
+        /// <param name="p0">response pattern</param>
         [Then(@"should get  response of '(.*)'")]
         public void ThenRegisterShouldGetResponseOf(string p0)
         {
@@ -300,8 +271,11 @@ namespace EStoreShoppingSys.Steps
             }
            
         }
+
         [Given(@"at  '(.*)' generate the '(.*)' username and '(.*)' password ")]
-        //generate the 'random' username and 'random' password at  'RegisterEndPoint'
+        //e.g. generate the 'random' username and 'random' password at  'RegisterEndPoint'
+        //e.g. generate the 'exsiting' username and 'exsiting' password at  'RegisterEndPoint'
+        
         public void GivenGenerateTheUsernameAndPasswordAt(  string p_username, string p_password)
         {
 
@@ -341,8 +315,7 @@ namespace EStoreShoppingSys.Steps
             }
         }
 
-        [When(@"visit the register API '(.*)' with the username and password")]
-        //visit the register API 'RegisterEndPoint' with the username and password
+        //visit the register API e.g.'RegisterEndPoint' with the username and password
         public void WhenVisitTheRegisterAPIWithTheUsernameAndPassword()
         {
             string baseUrlEStoreBaseURL = "EStoreBaseURL";

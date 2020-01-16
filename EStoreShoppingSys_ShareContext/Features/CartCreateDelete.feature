@@ -3,8 +3,8 @@
 	As user
 	I want to create and delete the cart
 
-@mytag
-Scenario: success to create cart by valid token
+@Smoke
+Scenario: C18 success to create cart by valid token
 	Given register login and  get valid token
 	When CART create with the  token
 	Then should get  response of 'OK'
@@ -12,18 +12,19 @@ Scenario: success to create cart by valid token
 	And add  item:  ['datas'] ['cartId,amountDue'] in response body to scenario context
 	And should keep value constant for keys 'accountNumber'
 
-Scenario: fail to create cart by invalid token
+@ShouldFail
+Scenario: C19 fail to create cart by invalid token
 	Given register login and  get valid token
 	When CART create  with the  invalid token
 	Then should get  response of 'CredentialError'
-
-Scenario: fail to create cart if user already has a cart
+@ShouldFail
+Scenario: C20 fail to create cart if user already has a cart
 	Given register login and  get valid token
 	When CART create with the  token twice
 	Then should get  response of 'DuplicateCartError'
 
-
-Scenario: success to delete cart by valid token
+@Smoke
+Scenario: C21 success to delete cart by valid token
 	Given register login and  get valid token
 	And CART create with the  token
 	When CART delete  with the  token
@@ -32,7 +33,8 @@ Scenario: success to delete cart by valid token
 	And add  item:  ['datas'] ['cartId,accountNumber'] in response body to scenario context
 	And should keep value constant for keys 'cartId,accountNumber'
 
-Scenario: fail to delete cart by invalid token
+@ShouldFail
+Scenario: C22 fail to delete cart by invalid token
 	Given register login and  get valid token
 	And CART create with the  token	
 	When CART delete  with the invalid token

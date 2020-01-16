@@ -75,14 +75,14 @@ namespace EStoreShoppingSys.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("success  to view product info list with valid credential")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void SuccessToViewProductInfoListWithValidCredential()
+        [NUnit.Framework.DescriptionAttribute("C32 success  to view product info list with valid credential")]
+        [NUnit.Framework.CategoryAttribute("Smoke")]
+        public virtual void C32SuccessToViewProductInfoListWithValidCredential()
         {
             string[] tagsOfScenario = new string[] {
-                    "mytag"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("success  to view product info list with valid credential", null, new string[] {
-                        "mytag"});
+                    "Smoke"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C32 success  to view product info list with valid credential", null, new string[] {
+                        "Smoke"});
 #line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -120,12 +120,15 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("fail  to view product info with invalid credential")]
-        public virtual void FailToViewProductInfoWithInvalidCredential()
+        [NUnit.Framework.DescriptionAttribute("C33 fail  to view product info with invalid credential")]
+        [NUnit.Framework.CategoryAttribute("ShouldFail")]
+        public virtual void C33FailToViewProductInfoWithInvalidCredential()
         {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("fail  to view product info with invalid credential", null, ((string[])(null)));
-#line 12
+            string[] tagsOfScenario = new string[] {
+                    "ShouldFail"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C33 fail  to view product info with invalid credential", null, new string[] {
+                        "ShouldFail"});
+#line 13
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -145,13 +148,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 13
+#line 14
  testRunner.Given("Register And Login And Create Cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 14
+#line 15
  testRunner.When("ProductInfo list get with invalid credential", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 15
+#line 16
  testRunner.Then("should get  response of \'CredentialError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

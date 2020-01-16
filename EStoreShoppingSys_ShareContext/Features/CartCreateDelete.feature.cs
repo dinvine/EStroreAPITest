@@ -75,14 +75,14 @@ namespace EStoreShoppingSys.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("success to create cart by valid token")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void SuccessToCreateCartByValidToken()
+        [NUnit.Framework.DescriptionAttribute("C18 success to create cart by valid token")]
+        [NUnit.Framework.CategoryAttribute("Smoke")]
+        public virtual void C18SuccessToCreateCartByValidToken()
         {
             string[] tagsOfScenario = new string[] {
-                    "mytag"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("success to create cart by valid token", null, new string[] {
-                        "mytag"});
+                    "Smoke"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C18 success to create cart by valid token", null, new string[] {
+                        "Smoke"});
 #line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -126,12 +126,15 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("fail to create cart by invalid token")]
-        public virtual void FailToCreateCartByInvalidToken()
+        [NUnit.Framework.DescriptionAttribute("C19 fail to create cart by invalid token")]
+        [NUnit.Framework.CategoryAttribute("ShouldFail")]
+        public virtual void C19FailToCreateCartByInvalidToken()
         {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("fail to create cart by invalid token", null, ((string[])(null)));
-#line 15
+            string[] tagsOfScenario = new string[] {
+                    "ShouldFail"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C19 fail to create cart by invalid token", null, new string[] {
+                        "ShouldFail"});
+#line 16
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -151,13 +154,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 16
+#line 17
  testRunner.Given("register login and  get valid token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 17
+#line 18
  testRunner.When("CART create  with the  invalid token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 18
+#line 19
  testRunner.Then("should get  response of \'CredentialError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -165,12 +168,15 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("fail to create cart if user already has a cart")]
-        public virtual void FailToCreateCartIfUserAlreadyHasACart()
+        [NUnit.Framework.DescriptionAttribute("C20 fail to create cart if user already has a cart")]
+        [NUnit.Framework.CategoryAttribute("ShouldFail")]
+        public virtual void C20FailToCreateCartIfUserAlreadyHasACart()
         {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("fail to create cart if user already has a cart", null, ((string[])(null)));
-#line 20
+            string[] tagsOfScenario = new string[] {
+                    "ShouldFail"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C20 fail to create cart if user already has a cart", null, new string[] {
+                        "ShouldFail"});
+#line 21
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -190,13 +196,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 21
+#line 22
  testRunner.Given("register login and  get valid token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 22
+#line 23
  testRunner.When("CART create with the  token twice", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 23
+#line 24
  testRunner.Then("should get  response of \'DuplicateCartError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -204,12 +210,15 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("success to delete cart by valid token")]
-        public virtual void SuccessToDeleteCartByValidToken()
+        [NUnit.Framework.DescriptionAttribute("C21 success to delete cart by valid token")]
+        [NUnit.Framework.CategoryAttribute("Smoke")]
+        public virtual void C21SuccessToDeleteCartByValidToken()
         {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("success to delete cart by valid token", null, ((string[])(null)));
-#line 26
+            string[] tagsOfScenario = new string[] {
+                    "Smoke"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C21 success to delete cart by valid token", null, new string[] {
+                        "Smoke"});
+#line 27
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -229,26 +238,26 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 27
+#line 28
  testRunner.Given("register login and  get valid token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 28
+#line 29
  testRunner.And("CART create with the  token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 29
+#line 30
  testRunner.When("CART delete  with the  token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 30
+#line 31
  testRunner.Then("should get  response of \'OK\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 31
+#line 32
  testRunner.And("should get response comform with model \'CartDelete\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 32
+#line 33
  testRunner.And("add  item:  [\'datas\'] [\'cartId,accountNumber\'] in response body to scenario conte" +
                         "xt", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 33
+#line 34
  testRunner.And("should keep value constant for keys \'cartId,accountNumber\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
@@ -256,12 +265,15 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("fail to delete cart by invalid token")]
-        public virtual void FailToDeleteCartByInvalidToken()
+        [NUnit.Framework.DescriptionAttribute("C22 fail to delete cart by invalid token")]
+        [NUnit.Framework.CategoryAttribute("ShouldFail")]
+        public virtual void C22FailToDeleteCartByInvalidToken()
         {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("fail to delete cart by invalid token", null, ((string[])(null)));
-#line 35
+            string[] tagsOfScenario = new string[] {
+                    "ShouldFail"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C22 fail to delete cart by invalid token", null, new string[] {
+                        "ShouldFail"});
+#line 37
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -281,16 +293,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 36
+#line 38
  testRunner.Given("register login and  get valid token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 37
+#line 39
  testRunner.And("CART create with the  token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 38
+#line 40
  testRunner.When("CART delete  with the invalid token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 39
+#line 41
  testRunner.Then("should get  response of \'CredentialError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

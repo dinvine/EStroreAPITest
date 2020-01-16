@@ -75,14 +75,14 @@ namespace EStoreShoppingSys.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("success to obtain token by valid credential")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void SuccessToObtainTokenByValidCredential()
+        [NUnit.Framework.DescriptionAttribute("C10 success to obtain token by valid credential")]
+        [NUnit.Framework.CategoryAttribute("Smoke")]
+        public virtual void C10SuccessToObtainTokenByValidCredential()
         {
             string[] tagsOfScenario = new string[] {
-                    "mytag"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("success to obtain token by valid credential", null, new string[] {
-                        "mytag"});
+                    "Smoke"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C10 success to obtain token by valid credential", null, new string[] {
+                        "Smoke"});
 #line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -127,12 +127,15 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("fail to obtain token by invalid credential")]
-        public virtual void FailToObtainTokenByInvalidCredential()
+        [NUnit.Framework.DescriptionAttribute("C11 fail to obtain token by invalid credential")]
+        [NUnit.Framework.CategoryAttribute("ShouldFail")]
+        public virtual void C11FailToObtainTokenByInvalidCredential()
         {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("fail to obtain token by invalid credential", null, ((string[])(null)));
-#line 15
+            string[] tagsOfScenario = new string[] {
+                    "ShouldFail"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C11 fail to obtain token by invalid credential", null, new string[] {
+                        "ShouldFail"});
+#line 16
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -152,13 +155,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 16
+#line 17
  testRunner.Given("get the unregisted username and password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 17
+#line 18
  testRunner.When("get token with \'invalid\' credential", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 18
+#line 19
  testRunner.Then("should get  response of \'UsernameError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

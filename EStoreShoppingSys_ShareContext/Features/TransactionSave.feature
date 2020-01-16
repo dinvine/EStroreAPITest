@@ -6,8 +6,8 @@
 
 Background:
 	Given Register And Login And Create Cart
-@mytag
-Scenario: Success to save items into transaction
+@Smoke
+Scenario: C36 Success to save items into transaction
 	Given get transaction number
 	When TransactionSave add the items in table to transaction
 | itemId | itemName              | quantity | price | amount	|
@@ -23,8 +23,9 @@ Scenario: Success to save items into transaction
     # but the real API return the datas =null , so the code below can not be tested.
 	# And TransactionSave  items  should be same to the table
 
-
-	Scenario: Should Fail to save items into transaction with invalid credential
+	
+@ShouldFail
+	Scenario: C37 Should Fail to save items into transaction with invalid credential
 	Given get transaction number
 	When TransactionSave add the items in table to transaction with invalid credential
 | itemId | itemName              | quantity | price | amount	|
@@ -32,8 +33,9 @@ Scenario: Success to save items into transaction
 	Then should get  response of 'CredentialError'
 
 
-
-Scenario: Should Fail to save items into transaction with invalid itemid
+	
+@ShouldFail
+Scenario: C38 Should Fail to save items into transaction with invalid itemid
 	Given TransactionSave get transaction number
 	When TransactionSave add the items in table to transaction
 | itemId | itemName              | quantity | price | amount	|
@@ -41,16 +43,18 @@ Scenario: Should Fail to save items into transaction with invalid itemid
 	# (X) assume the response return fail , but the real API return the success, so the code below can not be tested.
 	Then should get  response of 'InvalidItemError'
 
-
-Scenario: Should Fail to save items into transaction with invalid accountNumber
+	
+@ShouldFail
+Scenario: C39 Should Fail to save items into transaction with invalid accountNumber
 	Given TransactionSave get transaction number
 	When TransactionSave add the items in table to transaction with invalid accountNumber
 | itemId | itemName              | quantity | price | amount	|
 | 1      | Apple Watch Series 4  | 1        | 550   | 550		|
 	# (X)  assume the response return fail , but the real API return the success, so the code below can not be tested.
 	Then should get  response of 'AccountNumberError'
-
-Scenario: Should Fail to save items into transaction with invalid transactionNumber
+	
+@ShouldFail
+Scenario: C40 Should Fail to save items into transaction with invalid transactionNumber
 	Given TransactionSave get transaction number
 	When TransactionSave add the items in table to transaction with invalid transactionNumber
 | itemId | itemName              | quantity | price | amount	|

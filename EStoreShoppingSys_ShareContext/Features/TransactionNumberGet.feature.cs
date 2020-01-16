@@ -75,14 +75,14 @@ namespace EStoreShoppingSys.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("success  to obtain transaction number with valid credential")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void SuccessToObtainTransactionNumberWithValidCredential()
+        [NUnit.Framework.DescriptionAttribute("C34 success  to obtain transaction number with valid credential")]
+        [NUnit.Framework.CategoryAttribute("Smoke")]
+        public virtual void C34SuccessToObtainTransactionNumberWithValidCredential()
         {
             string[] tagsOfScenario = new string[] {
-                    "mytag"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("success  to obtain transaction number with valid credential", null, new string[] {
-                        "mytag"});
+                    "Smoke"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C34 success  to obtain transaction number with valid credential", null, new string[] {
+                        "Smoke"});
 #line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -123,12 +123,15 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("fail  to obtain transaction number with invalid credential")]
-        public virtual void FailToObtainTransactionNumberWithInvalidCredential()
+        [NUnit.Framework.DescriptionAttribute("C35 fail  to obtain transaction number with invalid credential")]
+        [NUnit.Framework.CategoryAttribute("ShouldFail")]
+        public virtual void C35FailToObtainTransactionNumberWithInvalidCredential()
         {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("fail  to obtain transaction number with invalid credential", null, ((string[])(null)));
-#line 13
+            string[] tagsOfScenario = new string[] {
+                    "ShouldFail"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C35 fail  to obtain transaction number with invalid credential", null, new string[] {
+                        "ShouldFail"});
+#line 14
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -148,13 +151,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 14
+#line 15
  testRunner.Given("Register And Login And Create Cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 15
+#line 16
  testRunner.When("TransactionNumber get with invalid credential", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 16
+#line 17
  testRunner.Then("should get  response of \'CredentialError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

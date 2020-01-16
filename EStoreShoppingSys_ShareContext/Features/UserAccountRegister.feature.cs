@@ -75,14 +75,14 @@ namespace EStoreShoppingSys.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("successful register with valid username and password")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void SuccessfulRegisterWithValidUsernameAndPassword()
+        [NUnit.Framework.DescriptionAttribute("C12 successful register with valid username and password")]
+        [NUnit.Framework.CategoryAttribute("Smoke")]
+        public virtual void C12SuccessfulRegisterWithValidUsernameAndPassword()
         {
             string[] tagsOfScenario = new string[] {
-                    "mytag"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("successful register with valid username and password", null, new string[] {
-                        "mytag"});
+                    "Smoke"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C12 successful register with valid username and password", null, new string[] {
+                        "Smoke"});
 #line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -120,12 +120,15 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("fail to register with existing username")]
-        public virtual void FailToRegisterWithExistingUsername()
+        [NUnit.Framework.DescriptionAttribute("C13 fail to register with existing username")]
+        [NUnit.Framework.CategoryAttribute("ShouldFail")]
+        public virtual void C13FailToRegisterWithExistingUsername()
         {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("fail to register with existing username", null, ((string[])(null)));
-#line 13
+            string[] tagsOfScenario = new string[] {
+                    "ShouldFail"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C13 fail to register with existing username", null, new string[] {
+                        "ShouldFail"});
+#line 14
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -145,10 +148,10 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 14
+#line 15
  testRunner.When("register with \'existing\' username and \'random\' password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 15
+#line 16
  testRunner.Then("should get  response of \'RegisteredError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -156,12 +159,15 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("fail to register with empty username")]
-        public virtual void FailToRegisterWithEmptyUsername()
+        [NUnit.Framework.DescriptionAttribute("C14 fail to register with empty username")]
+        [NUnit.Framework.CategoryAttribute("ShouldFail")]
+        public virtual void C14FailToRegisterWithEmptyUsername()
         {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("fail to register with empty username", null, ((string[])(null)));
-#line 17
+            string[] tagsOfScenario = new string[] {
+                    "ShouldFail"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C14 fail to register with empty username", null, new string[] {
+                        "ShouldFail"});
+#line 19
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -181,10 +187,10 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 18
+#line 20
  testRunner.When("register with \'empty\' username and \'random\' password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 19
+#line 21
  testRunner.Then("should get  response of \'UsernameError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -192,12 +198,15 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("fail to register with empty password")]
-        public virtual void FailToRegisterWithEmptyPassword()
+        [NUnit.Framework.DescriptionAttribute("C15 fail to register with empty password")]
+        [NUnit.Framework.CategoryAttribute("ShouldFail")]
+        public virtual void C15FailToRegisterWithEmptyPassword()
         {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("fail to register with empty password", null, ((string[])(null)));
-#line 21
+            string[] tagsOfScenario = new string[] {
+                    "ShouldFail"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C15 fail to register with empty password", null, new string[] {
+                        "ShouldFail"});
+#line 24
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -217,10 +226,10 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 22
+#line 25
  testRunner.When("register with \'random\' username and \'empty\' password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 23
+#line 26
  testRunner.Then("should get  response of \'PasswordError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

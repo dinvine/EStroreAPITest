@@ -28,11 +28,7 @@ namespace EStoreShoppingSys.Steps
             _sharedSteps.RegisterLoginAndCreateCart();
         }
         
-        [When(@"AccountDelete delete the account number")]
-        public void WhenAccountDeleteDeleteTheAccountNumber()
-        {
-            _sharedSteps.GivenDeleteAccount();
-        }
+
         
         [When(@"AccountDelete delete the account number with invalid token")]
         public void WhenAccountDeleteDeleteTheAccountNumberWithInvalidToken()

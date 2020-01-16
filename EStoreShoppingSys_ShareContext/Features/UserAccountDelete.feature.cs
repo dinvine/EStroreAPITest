@@ -75,14 +75,14 @@ namespace EStoreShoppingSys.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("success to delete account by valid credential")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void SuccessToDeleteAccountByValidCredential()
+        [NUnit.Framework.DescriptionAttribute("C16 success to delete account by valid credential")]
+        [NUnit.Framework.CategoryAttribute("Smoke")]
+        public virtual void C16SuccessToDeleteAccountByValidCredential()
         {
             string[] tagsOfScenario = new string[] {
-                    "mytag"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("success to delete account by valid credential", null, new string[] {
-                        "mytag"});
+                    "Smoke"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C16 success to delete account by valid credential", null, new string[] {
+                        "Smoke"});
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -120,12 +120,15 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("fail to delete account by invalid credential")]
-        public virtual void FailToDeleteAccountByInvalidCredential()
+        [NUnit.Framework.DescriptionAttribute("C17 fail to delete account by invalid credential")]
+        [NUnit.Framework.CategoryAttribute("ShouldFail")]
+        public virtual void C17FailToDeleteAccountByInvalidCredential()
         {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("fail to delete account by invalid credential", null, ((string[])(null)));
-#line 16
+            string[] tagsOfScenario = new string[] {
+                    "ShouldFail"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C17 fail to delete account by invalid credential", null, new string[] {
+                        "ShouldFail"});
+#line 17
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -145,13 +148,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 17
+#line 18
  testRunner.Given("Register And Login And Create Cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 18
+#line 19
  testRunner.When("AccountDelete delete the account number with invalid token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 20
+#line 21
  testRunner.Then("should get  response of \'CredentialError\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -159,12 +162,15 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("fail to delete account by invalid account_number")]
-        public virtual void FailToDeleteAccountByInvalidAccount_Number()
+        [NUnit.Framework.DescriptionAttribute("C41 fail to delete account by invalid account_number")]
+        [NUnit.Framework.CategoryAttribute("ShouldFail")]
+        public virtual void C41FailToDeleteAccountByInvalidAccount_Number()
         {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("fail to delete account by invalid account_number", null, ((string[])(null)));
-#line 23
+            string[] tagsOfScenario = new string[] {
+                    "ShouldFail"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("C41 fail to delete account by invalid account_number", null, new string[] {
+                        "ShouldFail"});
+#line 24
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -184,13 +190,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 24
+#line 25
  testRunner.Given("Register And Login And Create Cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 25
+#line 26
  testRunner.When("AccountDelete delete the account number with invalid account_number", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 26
+#line 27
  testRunner.Then("should get  response of \'unexpected\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

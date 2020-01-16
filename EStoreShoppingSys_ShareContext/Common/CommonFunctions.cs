@@ -12,6 +12,11 @@ namespace EStoreShoppingSys.Model
 {
     public static class FunctionsShared
     {
+        /// <summary>
+        /// getnerate random string in a~zA~Z0~9
+        /// </summary>
+        /// <param name="length"> the length of string return</param>
+        /// <returns></returns>
         public static string GetRandomString(int length)
         {
             Random r = new Random();
@@ -23,7 +28,11 @@ namespace EStoreShoppingSys.Model
             }
             return rStr;
         }
-
+        /// <summary>
+        /// convert the response headers to Dictionary type
+        /// </summary>
+        /// <param name="restResponse">response from rest request</param>
+        /// <returns></returns>
         public static Dictionary<string, string> GetResponseHeaderDict(IRestResponse restResponse) {
 
             Dictionary<string, string> headerList = new Dictionary<string, string>();
@@ -37,6 +46,12 @@ namespace EStoreShoppingSys.Model
             return headerList;
         }
 
+        /// <summary>
+        /// asynchronized execution of request of rest client.
+        /// </summary>
+        /// <param name="client">means extention method of RestClient</param>
+        /// <param name="request">client request</param>
+        /// <returns></returns>
         public static async Task<IRestResponse> ExecuteAsyncRequest(this RestClient client, IRestRequest request) 
         {
             var taskCompletionSource = new TaskCompletionSource<IRestResponse>();
@@ -52,6 +67,12 @@ namespace EStoreShoppingSys.Model
             return await taskCompletionSource.Task;
         }
 
+        /// <summary>
+        /// compare json string with model class named schemaName 
+        /// </summary>
+        /// <param name="jsonStr">json string</param>
+        /// <param name="schemaName">name of model schema</param>
+        /// <returns> true  if matches</returns>
         public static Boolean CompareJsonWithSchema(string jsonStr,string schemaName)
         {
             JObject jObject= JObject.Parse(jsonStr);

@@ -6,8 +6,8 @@
 
 Background:
 	Given Register And Login And Create Cart
-@mytag
-Scenario: Success to Add Items into the cart
+@Smoke
+Scenario: C25 Success to Add Items into the cart
 	Given add the valid items table to cart
 | itemId | quantity | price | amount    |
 | 1      | 1        | 550   | 550       |
@@ -28,26 +28,29 @@ Scenario: Success to Add Items into the cart
 | 5      | 99999    | 27.9  | 2789972.1 |
 
 
-Scenario: Should fail to add items to cart with invalid credential
+@ShouldFail
+Scenario: C26 Should fail to add items to cart with invalid credential
 Given CARTADDITEM add the valid items table to cart with invalid credential
 | itemId | quantity | price | amount    |
 | 1      | 1        | 550   | 550       |
 Then should get  response of 'CredentialError'
 
-Scenario: Should fail to add items to cart with invalid itemid
+@ShouldFail
+Scenario: C27 Should fail to add items to cart with invalid itemid
 Given CARTADDITEM add the invalid items table to cart
 | itemId	| quantity | price | amount    |
 | 999999	| 1        | 550   | 550       |
 Then should get  response of 'InvalidItemError'
 
-Scenario: Should fail to add items to cart with invalid cartid
+@ShouldFail
+Scenario: C28 Should fail to add items to cart with invalid cartid
 Given CARTADDITEM add the items in table to cart with invalid cartid
 | itemId	| quantity | price | amount    |
 | 1	| 1        | 550   | 550       |
 Then should get  response of 'InvalidCartError'
 
-
-Scenario: Success to Delete Items from the cart
+@Smoke
+Scenario: C29 Success to Delete Items from the cart
 	Given add the valid items table to cart
 | itemId | quantity | price | amount    |
 | 1      | 1        | 550   | 550       |
@@ -65,7 +68,8 @@ Scenario: Success to Delete Items from the cart
 | 2      | 99       | 24.95 | 2470.05   |
 | 3      | 999      | 22.5  | 22477.5   |
 
-Scenario: Should fail to delete items from cart with invalid credential
+@ShouldFail
+Scenario: C30 Should fail to delete items from cart with invalid credential
 	Given add the valid items table to cart
 | itemId | quantity | price | amount    |
 | 1      | 1        | 550   | 550       |
@@ -76,13 +80,15 @@ Then should get  response of 'CredentialError'
 
 
 
-Scenario: Should fail to delete items from empty cart
+@ShouldFail
+Scenario: C31 Should fail to delete items from empty cart
 	Given CARTADDITEM delete the unexisting items  from cart 
 | itemId	| quantity | price | amount    |
 | 2			| 1        | 550   | 550       |
 Then should get  response of 'InvalidItemError'
 
-Scenario: Should fail to delete invalid items from cart
+@ShouldFail
+Scenario: C42 Should fail to delete invalid items from cart
 	Given add the valid items table to cart
 | itemId | quantity | price | amount    |
 | 1      | 1        | 550   | 550       |
