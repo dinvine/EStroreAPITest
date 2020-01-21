@@ -36,7 +36,8 @@ namespace EStoreShoppingSys.Steps
                 _sharedSteps.ThenWithItemNamedContainingSubstring("message", "success");
             }
 
-            APIClient client = new APIClient("https://dinvine.testrail.io/");
+            APIClient client = new APIClient("https://dinvine.testrail.io");
+        // https://dinvine.testrail.io/index.php?/api/v2/add_result_for_case/:run_id/:case_id
             client.User = "dinvine@qq.com"; //user e-mail
             client.Password = "8pLWKCUv7.3UUWKNZB3h"; //user password
             Dictionary<string, object> testResult = new Dictionary<string, object>();
@@ -45,7 +46,6 @@ namespace EStoreShoppingSys.Steps
             {
 
                 testResult["status_id"] = "5"; //failed;
-
                 testResult["comment"] = context.TestError.ToString();
             }
 
@@ -59,9 +59,8 @@ namespace EStoreShoppingSys.Steps
             strTestRailCaseId = strTestRailCaseId.Substring(1, strTestRailCaseId.Length - 1);
             if (int.Parse(strTestRailCaseId) <= 500)
             {
-                string strTestRailAddResultURL = @"add_result/" + strTestRailCaseId;
+                string strTestRailAddResultURL = @"add_result_for_case/1/"+ strTestRailCaseId;
                 client.SendPost(strTestRailAddResultURL, testResult); //hardcoded test id.
-
             }
         }
     }
